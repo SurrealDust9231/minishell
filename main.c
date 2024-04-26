@@ -6,11 +6,11 @@
 /*   By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 14:04:06 by saguayo-          #+#    #+#             */
-/*   Updated: 2024/04/26 15:19:15 by saguayo-         ###   ########.fr       */
+/*   Updated: 2024/04/26 15:50:06 by saguayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "minitalk.h"
 
 // UTILS START
 int	ft_strcmp(char *s1, char *s2)
