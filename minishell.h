@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 21:37:06 by saguayo-          #+#    #+#             */
-/*   Updated: 2024/04/26 13:57:41 by saguayo-         ###   ########.fr       */
+/*   Updated: 2024/04/26 16:38:28 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <string.h>
 # include <unistd.h>
 # include <readline/readline.h>
-# include "libft01/libft.h"
+# include <libft.h>
 
 # define MAX_ARGS 10
 #define MAX_CMD_LEN 1024
@@ -39,9 +39,6 @@ typedef struct	s_pipeline
     int			num_commands; // Numero de command dans la pipeline
 }	t_pipeline;
 
-size_t	ft_strlen(const char *s);
-
 char	**custom_split(char *str);
-char	**ft_split(char const *s, char c);
 
 #endif
