@@ -1,0 +1,7 @@
+#gitignore all kind of files
+*.*
+#excepto estos archivos
+!*.c
+!*.h
+!Makefile
+
