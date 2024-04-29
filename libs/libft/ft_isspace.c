@@ -6,12 +6,12 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:35:21 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/04/26 16:35:23 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/04/29 16:25:23 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_isspace(int c)
+int	ft_isspace(int c)
 {
-	return (c == ' ' || c == '\t' || c == '\n' ||
-			c == '\v' || c == '\f' || c == '\r');
+	return (c == ' ' || c == '\t' || c == '\n' || \
+		c == '\v' || c == '\f' || c == '\r');
 }

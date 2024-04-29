@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 19:55:22 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/04/29 16:02:51 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/04/29 16:24:49 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@
 
 typedef enum e_token_type
 {
-	TK_END			= -1,
-	TK_NULL		= 0,
-    TK_COMMAND,
-    TK_PIPE,
-    TK_REDIRECT_IN,
+	TK_END	= -1,
+	TK_NULL	= 0,
+	TK_COMMAND,
+	TK_PIPE,
+	TK_REDIRECT_IN,
 	TK_REDIRECT_HEREDOC,
-    TK_REDIRECT_OUT,
-    TK_REDIRECT_APPEND,
-    TK_SEQUENCE
+	TK_REDIRECT_OUT,
+	TK_REDIRECT_APPEND,
+	TK_SEQUENCE
 }	t_ttype;
 
 typedef struct s_astree	t_astree;

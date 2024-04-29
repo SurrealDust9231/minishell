@@ -6,14 +6,15 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 21:19:14 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/04/29 16:08:21 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/04/29 16:24:29 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftast.h"
 #include <stdio.h>
 
-static void	_ft_ast_vis_m(t_astree *ast, char m[50][50], int p, int n)
+static void	_ft_ast_vis_m(t_astree *ast, \
+	char m[50][50], int p, int n)
 {
 	char		c;
 
@@ -43,10 +44,7 @@ void	ft_ast_vis(t_astree *ast)
 	{
 		c = 0;
 		while (c < 50)
-		{
-			m[c][r] = ' ';
-			c++;
-		}
+			m[c++][r] = ' ';
 		r++;
 	}
 	_ft_ast_vis_m(ast, m, 25, 0);
@@ -55,10 +53,7 @@ void	ft_ast_vis(t_astree *ast)
 	{
 		c = 0;
 		while (c < 50)
-		{
-			printf("%c", m[c][r]);
-			c++;
-		}
+			printf("%c", m[c++][r]);
 		printf("\n");
 		r++;
 	}
