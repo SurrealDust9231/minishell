@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ftast_vis_test.c                                   :+:      :+:    :+:   */
+/*   mbe_simple_cmd_test.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 14:06:55 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/04/29 17:28:32 by chang-pa         ###   ########.fr       */
+/*   Created: 2024/04/29 16:32:43 by chang-pa          #+#    #+#             */
+/*   Updated: 2024/04/29 17:35:20 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unittests.h"
 
-void	ftast_test(void)
+int	mbes_test(void)
 {
 	t_astree	*ast;
-	t_astree	*node;
 
 	ft_ast_create(&ast);
-	ft_ast_init(ast, TK_PIPE, NULL);
-	ft_ast_create(&node);
-	ft_ast_init(node, TK_COMMAND, NULL);
-	ast->l = node;
-	ft_ast_create(&node);
-	ft_ast_init(node, TK_NULL, NULL);
-	ast->r = node;
-	ft_ast_vis(ast);
+	ft_ast_init(ast, TK_COMMAND, ft_split("ls -la", ' '));
+	if (mbe_simple_cmd(ast) != 0)
+		return (-1);
 	ft_ast_destroy(&ast);
+	return (0);
 }

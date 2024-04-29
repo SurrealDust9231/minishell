@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ftast_vis_test.c                                   :+:      :+:    :+:   */
+/*   ft_error_return.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 14:06:55 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/04/29 17:28:32 by chang-pa         ###   ########.fr       */
+/*   Created: 2024/04/29 17:43:37 by chang-pa          #+#    #+#             */
+/*   Updated: 2024/04/29 17:58:26 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unittests.h"
+#include <unistd.h>
+#include <errno.h>
+#include <string.h>
+#include <stdio.h>
 
-void	ftast_test(void)
+static void	_fer_putendl_fd(char *s, int fd)
 {
-	t_astree	*ast;
-	t_astree	*node;
+	while (*s != 0)
+	{
+		write(fd, s, 1);
+		s++;
+	}
+	write(fd, "\n", 1);
+}
 
-	ft_ast_create(&ast);
-	ft_ast_init(ast, TK_PIPE, NULL);
-	ft_ast_create(&node);
-	ft_ast_init(node, TK_COMMAND, NULL);
-	ast->l = node;
-	ft_ast_create(&node);
-	ft_ast_init(node, TK_NULL, NULL);
-	ast->r = node;
-	ft_ast_vis(ast);
-	ft_ast_destroy(&ast);
+int	ft_error_return(const char *msg, int rt)
+{
+	perror(msg);
+	_fer_putendl_fd(strerror(errno), STDERR_FILENO);
+	return (rt);
 }

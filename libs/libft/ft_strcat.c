@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:03:12 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/04/29 14:04:23 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/04/29 16:49:56 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,5 @@ void	ft_strcat(char *dst, char *src)
 		dst++;
 		src++;
 	}
+	*dst = *src;
 }

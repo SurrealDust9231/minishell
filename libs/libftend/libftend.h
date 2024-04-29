@@ -1,30 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ftast_vis_test.c                                   :+:      :+:    :+:   */
+/*   libftend.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 14:06:55 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/04/29 17:28:32 by chang-pa         ###   ########.fr       */
+/*   Created: 2024/02/12 12:29:14 by chang-pa          #+#    #+#             */
+/*   Updated: 2024/04/29 17:46:24 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unittests.h"
+#ifndef LIBFTEND_H
+# define LIBFTEND_H
 
-void	ftast_test(void)
-{
-	t_astree	*ast;
-	t_astree	*node;
+int	ft_error_return(const char *msg, int rt);
 
-	ft_ast_create(&ast);
-	ft_ast_init(ast, TK_PIPE, NULL);
-	ft_ast_create(&node);
-	ft_ast_init(node, TK_COMMAND, NULL);
-	ast->l = node;
-	ft_ast_create(&node);
-	ft_ast_init(node, TK_NULL, NULL);
-	ast->r = node;
-	ft_ast_vis(ast);
-	ft_ast_destroy(&ast);
-}
+#endif

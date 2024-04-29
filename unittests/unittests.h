@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 19:02:47 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/04/29 16:16:51 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/04/29 16:41:38 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 
 # include <libft.h>
 # include <libftast.h>
+# include <minishell_backend.h>
 
 # define ERROR			-1
 # define KEY_LEFT		4479771
@@ -40,5 +41,6 @@
 void	ftast_test(void);
 void	ncurses_test(void);
 void	readline_test(void);
+int		mbes_test(void);
 
 #endif

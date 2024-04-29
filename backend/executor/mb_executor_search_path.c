@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 17:53:01 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/04/28 21:53:56 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/04/29 17:37:53 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	*_mbesp_get_subcmd(size_t i[2], char *file_path, char *env_path)
 
 	flen = ft_strlen(file_path);
 	i[1] = i[0];
-	while(env_path[i[1]] && env_path[i[1]] != ':')
+	while (env_path[i[1]] && env_path[i[1]] != ':')
 		i[1]++;
 	plen = i[1] - i[0];
 	path = (char *) malloc(sizeof(char) * (plen + 1 + flen + 1));
@@ -28,15 +28,9 @@ static char	*_mbesp_get_subcmd(size_t i[2], char *file_path, char *env_path)
 		return (NULL);
 	ft_strncpy(path, env_path + i[0], plen);
 	path[plen] = '\0';
-	if(plen != 0 && env_path[i[1] - 1] != '/')
+	if (plen != 0 && env_path[i[1] - 1] != '/')
 		ft_strcat(path, "/");
 	ft_strcat(path, file_path);
-	return (path);
-}
-
-static char	*_mbesp_free(char *path, char *env_path)
-{
-	free(env_path);
 	return (path);
 }
 
@@ -51,18 +45,18 @@ char	*mbe_search_path(char *file_path)
 	if (file_path == NULL || env_path == NULL)
 		return (NULL);
 	i[0] = 0;
-	while(env_path[i[0]])
+	while (env_path[i[0]])
 	{
 		path = _mbesp_get_subcmd(i, file_path, env_path);
 		if (path == NULL)
-			return (_mbesp_free(NULL, env_path));
+			return (NULL);
 		if (stat(path, &st) == 0 && S_ISREG(st.st_mode))
-			return (_mbesp_free(path, env_path));
+			return (path);
 		free(path);
 		i[0] = i[1];
-		if(env_path[i[1]] == ':')
+		if (env_path[i[1]] == ':')
 			i[0]++;
 	}
 	errno = ENOENT;
-	return (_mbesp_free(NULL, env_path));
+	return (NULL);
 }

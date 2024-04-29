@@ -6,7 +6,7 @@
 #    By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/13 21:32:26 by chang-pa          #+#    #+#              #
-#    Updated: 2024/04/28 21:40:29 by chang-pa         ###   ########.fr        #
+#    Updated: 2024/04/29 18:00:37 by chang-pa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,13 +17,13 @@ ARFLAGS=rcs
 
 NAME=libminback.a
 
-INC=includes
+INC=-Iincludes
 
 _EOBJS=mb_executor_simple.o mb_executor_search_path.o
 EOBJS=$(_EOBJS:%=executor/%)
 
-LIBFT_DIR=../libs/libft
-LIBFA_DIR=../libs/libftast
+_LIBS_INC=libft libftast libftend
+LIBS_INC=$(_LIBS_INC:%=-I../libs/%)
 
 all: $(NAME)
 
@@ -33,7 +33,7 @@ $(NAME): $(EOBJS)
 	$(AR) $(ARFLAGS) $@ $(EOBJS)
 
 %.o: %.c
-	@$(CC) $(CFLAGS) -o $@ -c $< -I$(INC) -I$(LIBFT_DIR) -I$(LIBFA_DIR)
+	$(CC) $(CFLAGS) -o $@ -c $< $(INC) $(LIBS_INC)
 
 fclean: clean
 	rm -f $(NAME)
