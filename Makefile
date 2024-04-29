@@ -6,7 +6,7 @@
 #    By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/21 00:28:11 by chang-pa          #+#    #+#              #
-#    Updated: 2024/04/28 21:48:00 by chang-pa         ###   ########.fr        #
+#    Updated: 2024/04/29 14:21:26 by chang-pa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,9 +27,11 @@ LIBFA_DIR=libs/libftast
 LIBFA_FLAGS=-lftast -L$(LIBFA_DIR)
 
 FE_DIR=frontend
+FE_INC=$(FE_DIR)/includes
 FE_FLAGS=-lminfront -L$(FE_DIR)
 
 BE_DIR=backend
+BE_INC=$(BE_DIR)/includes
 BE_FLAGS=-lminback -L$(BE_DIR)
 
 RL_FLAGS=-lreadline
@@ -48,7 +50,7 @@ $(NAME): $(OBJS)
 	$(CC) -o $@ $(OBJS) $(FE_FLAGS) $(BE_FLAGS) $(LIBFT_FLAGS) $(LIBFA_FLAGS) $(RL_FLAGS)
 
 %.o: %.c
-	@$(CC) -o $@ -c $< -I. -I$(FE_DIR) -I$(BE_DIR) -I$(LIBFT_DIR) -I$(LIBFA_DIR)
+	@$(CC) -o $@ -c $< -I. -I$(FE_INC) -I$(BE_INC) -I$(LIBFT_DIR) -I$(LIBFA_DIR)
 
 fclean: clean
 	@make -C $(LIBFT_DIR) fclean

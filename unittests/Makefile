@@ -6,7 +6,7 @@
 #    By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/21 00:28:11 by chang-pa          #+#    #+#              #
-#    Updated: 2024/04/26 19:31:46 by chang-pa         ###   ########.fr        #
+#    Updated: 2024/04/29 14:17:47 by chang-pa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,8 +22,14 @@ NCOBJS=$(_NCOBJS:%=ncurses/%)
 _RLOBJS=readline_test.o
 RLOBJS=$(_RLOBJS:%=readline/%)
 
-LIBFT_DIR=../libft
+_FAOBJS=ftast_vis_test.o
+FAOBJS=$(_FAOBJS:%=ftast/%)
+
+LIBFT_DIR=../libs/libft
 LIBFT_FLAGS=-lft -L$(LIBFT_DIR)
+
+LIBFA_DIR=../libs/libftast
+LIBFA_FLAGS=-lftast -L$(LIBFA_DIR)
 
 RL_FLAGS=-lreadline
 
@@ -33,17 +39,20 @@ all: $(NAME)
 
 re: fclean all
 
-$(NAME): $(OBJS) $(NCOBJS) $(RLOBJS)
+$(NAME): $(OBJS) $(NCOBJS) $(RLOBJS) $(FAOBJS)
 	@make -C $(LIBFT_DIR)
-	$(CC) -o $@ $(OBJS) $(NCOBJS) $(RLOBJS) $(LIBFT_FLAGS) $(RL_FLAGS) $(NC_FLAGS)
+	@make -C $(LIBFA_DIR)
+	$(CC) -o $@ $(OBJS) $(NCOBJS) $(RLOBJS) $(FAOBJS) $(LIBFT_FLAGS) $(LIBFA_FLAGS) $(RL_FLAGS) $(NC_FLAGS)
 
 %.o: %.c
-	@$(CC) -o $@ -c $< -I. -I$(LIBFT_DIR)
+	@$(CC) -o $@ -c $< -I. -I$(LIBFT_DIR) -I$(LIBFA_DIR)
 
 fclean: clean
 	@make -C $(LIBFT_DIR) fclean
+	@make -C $(LIBFA_DIR) fclean
 	rm -f $(NAME)
 
 clean:
 	@make -C $(LIBFT_DIR) clean
-	rm -f $(OBJS)
+	@make -C $(LIBFA_DIR) clean
+	rm -f $(OBJS) $(NCOBJS) $(RLOBJS) $(FAOBJS)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 21:37:06 by saguayo-          #+#    #+#             */
-/*   Updated: 2024/04/29 13:56:20 by saguayo-         ###   ########.fr       */
+/*   Updated: 2024/04/29 14:23:57 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <term.h>
 # include <libft.h>
 # include <libftast.h>
-# include <frontend/includes/minishell_frontend.h>
+# include <minishell_frontend.h>
 
 typedef void (*node_handler)(t_astree *);
 
