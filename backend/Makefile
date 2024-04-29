@@ -5,49 +5,40 @@
 #                                                     +:+ +:+         +:+      #
 #    By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/04/21 00:28:11 by chang-pa          #+#    #+#              #
-#    Updated: 2024/04/28 19:57:47 by chang-pa         ###   ########.fr        #
+#    Created: 2024/02/13 21:32:26 by chang-pa          #+#    #+#              #
+#    Updated: 2024/04/28 19:58:54 by chang-pa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC=cc
 CFLAGS=-Wall -Wextra -Werror
+AR=ar
+ARFLAGS=rcs
 
-NAME=minishell
-OBJS=main.o comsplit.o
+NAME=libminback.a
 
-_SKOBJS=
-SKOBJS=$(_SKOBJS:%=ftsigkit/%)
-SK_DIR=ftsigkit
+INC=includes
 
-LIBFT_DIR=libs/libft
-LIBFT_FLAGS=-lft -L$(LIBFT_DIR)
+_EOBJS=mb_executor_simple.o mb_executor_search_path.o
+EOBJS=$(_EOBJS:%=executor/%)
 
-LIBFA_DIR=libs/libftast
-LIBFA_FLAGS=-lftast -L$(LIBFA_DIR)
-
-RL_FLAGS=-lreadline
-
-NC_FLAGS=-lncurses
+LIBFT_DIR=../libs/libft
+LIBFA_DIR=../libs/libftast
 
 all: $(NAME)
 
 re: fclean all
 
-$(NAME): $(OBJS)
-	@make -C $(LIBFT_DIR)
-	@make -C $(LIBFA_DIR)
-	$(CC) -o $@ $(OBJS) $(LIBFT_FLAGS) $(LIBFA_FLAGS) $(RL_FLAGS)
+$(NAME): $(EOBJS)
+	$(AR) $(ARFLAGS) $@ $(EOBJS)
 
 %.o: %.c
-	@$(CC) -o $@ -c $< -I. -I$(LIBFT_DIR) -I$(LIBFA_DIR)
+	@$(CC) $(CFLAGS) -o $@ -c $< -I$(INC) -I$(LIBFT_DIR) -I$(LIBFA_DIR)
 
 fclean: clean
-	@make -C $(LIBFT_DIR) fclean
-	@make -C $(LIBFA_DIR) fclean
 	rm -f $(NAME)
 
 clean:
-	@make -C $(LIBFT_DIR) clean
-	@make -C $(LIBFA_DIR) clean
-	rm -f $(OBJS)
+	rm -f $(EOBJS)
+
+.PHONY: all re bonus fclean clean $(NAME)
