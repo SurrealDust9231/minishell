@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
+/*   By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 14:04:06 by saguayo-          #+#    #+#             */
-/*   Updated: 2024/04/28 21:11:38 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/04/29 13:55:18 by saguayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,30 +125,34 @@ void execute_cd(char **args)
     }
 }
 
-int	main(void)
+int main(void)
 {
-	char	*line;
-	char	**av;
-	int		i;
-	int		j;
+	char *line;
+	char **av;
+	t_astree *ast;
+	int i;
 
 	while (1)
 	{
 		line = readline("WRITE YOUR COMMAND: ");
 		if (line == NULL)
-			break ; // salir del bucle si readline no lee nada
-		if (ft_strcmp(line, "exit") == 0) // para salir
-		{
-			free(line);
 			break ;
-		}
-		// if (line)
-		// 	add_history(line);
+		add_history(line);
 		av = custom_split(line);
 		if (!av)
 		{
 			free(line);
 			continue ;
+		}
+		printf("The line is: %s\n", line);
+		printf("Comand and args:\n");
+		i = 0;
+		while (av[i] != NULL)
+			printf("%s\n", av[i++]);
+		if (ft_strcmp(line, "exit") == 0)
+		{
+			free(line);
+			break ;
 		}
 		i = 0;
 		while (av[i] != NULL)
@@ -158,27 +162,15 @@ int	main(void)
 			av[i] = expanded;
 			i++;
 		}
-		printf("The line is: %s\n", line);
-		printf("Comand and args:\n");
-		i = 0;
-		while (av[i] != NULL)
-			printf("'%s'\n", av[i++]);
-		if (ft_strcmp(av[0], "pwd") == 0)
+		int index = 0;
+		ast = parseCommands(av, &index);
+		if (ast)
 		{
-			if (count_args(av) > 1)
-				printf("pwd: too many arguments\n");
-			else
-				execute_pwd();
+			executeAST(ast);
+			// freeAST(ast);
 		}
-		else if (ft_strcmp(av[0], "echo") == 0)
-			execute_echo(av);
-		else if (ft_strcmp(av[0], "cd") == 0)
-			execute_cd(av);
-		i = 0;
-		while (av[i] != NULL)
-			free(av[i++]);
 		free(av);
 		free(line);
 	}
-	return (0);
+	return 0;
 }
