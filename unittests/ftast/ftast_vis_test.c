@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:06:55 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/04/29 14:19:40 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/04/29 16:05:58 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ void	ftast_test(void)
 	ft_ast_create(&node);
 	ft_ast_init(node, TK_NULL, NULL);
 	ast->r = node;
-	ft_ast_vis(ast, 20, 10);
+	ft_ast_vis(ast);
 }
