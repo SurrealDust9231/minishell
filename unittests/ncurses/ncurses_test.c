@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 17:42:21 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/04/26 19:04:46 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/04/29 16:20:00 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ const char				*g_cm;
 const char				*g_ce;
 const char				*g_dc;
 
-bool	init_term(struct termios *t)
+static bool	init_term(struct termios *t)
 {
 	if (tcgetattr(STDIN_FILENO, t) == ERROR)
 		return (false);
@@ -28,7 +28,7 @@ bool	init_term(struct termios *t)
 	return (true);
 }
 
-bool	init_query(void)
+static bool	init_query(void)
 {
 	if (tgetent(NULL, "xterm") == ERROR)
 		return (false);
@@ -40,14 +40,14 @@ bool	init_query(void)
 	return (true);
 }
 
-int		putchar(int c)
+static int	ft_putchar(int c)
 {
 	if (write(STDOUT_FILENO, &c, 1) == ERROR)
 		return (0);
 	return (1);
 }
 
-bool	get_position(int *col, int *row)
+static bool	get_position(int *col, int *row)
 {
 	int					i;
 	int					ret;
@@ -71,58 +71,58 @@ bool	get_position(int *col, int *row)
 	return (true);
 }
 
-bool	cur_left(int *col, int *row)
+static bool	cur_left(int *col, int *row)
 {
 	if (*col)
 	{
 		--(*col);
-		if (tputs(tgoto(g_cm, *col, *row), 1, putchar) == ERROR)
+		if (tputs(tgoto(g_cm, *col, *row), 1, ft_putchar) == ERROR)
 			return (false);
 	}
 	return (true);
 }
 
-bool	cur_right(int *col, int *row)
+static bool	cur_right(int *col, int *row)
 {
 	++(*col);
-	if (tputs(tgoto(g_cm, *col, *row), 1, putchar) == ERROR)
+	if (tputs(tgoto(g_cm, *col, *row), 1, ft_putchar) == ERROR)
 		return (false);
 	return (true);
 }
 
-bool	cur_up(int *col, int *row)
+static bool	cur_up(int *col, int *row)
 {
 	if (*row)
 	{
 		--(*row);
-		if (tputs(tgoto(g_cm, *col, *row), 1, putchar) == ERROR)
+		if (tputs(tgoto(g_cm, *col, *row), 1, ft_putchar) == ERROR)
 			return (false);
 	}
 	return (true);
 }
 
-bool	cur_down(int *col, int *row)
+static bool	cur_down(int *col, int *row)
 {
 	++(*row);
-	if (tputs(tgoto(g_cm, *col, *row), 1, putchar) == ERROR)
+	if (tputs(tgoto(g_cm, *col, *row), 1, ft_putchar) == ERROR)
 		return (false);
 	return (true);
 }
 
-bool	cur_backspace(int *col, int *row)
+static bool	cur_backspace(int *col, int *row)
 {
 	if (*col)
 	{
 		--(*col);
-		if (tputs(tgoto(g_cm, *col, *row), 1, putchar) == ERROR)
+		if (tputs(tgoto(g_cm, *col, *row), 1, ft_putchar) == ERROR)
 			return (false);
 	}
-	if (tputs(g_dc, 1, putchar) == ERROR)
+	if (tputs(g_dc, 1, ft_putchar) == ERROR)
 		return (false);
 	return (true);
 }
 
-bool	key_handle(int ch, int *col, int *row)
+static bool	key_handle(int ch, int *col, int *row)
 {
 	if (ch == KEY_LEFT)
 	{
@@ -152,11 +152,12 @@ bool	key_handle(int ch, int *col, int *row)
 	else
 	{
 		++(*col);
-		if (!putchar(ch))
+		if (!ft_putchar(ch))
 			return (false);
 	}
 	return (true);
 }
+
 
 bool	read_char(void)
 {
@@ -178,4 +179,12 @@ bool	read_char(void)
 			return (false);
 		ch = 0;
 	}
+}
+
+void	readline_test(void)
+{
+	struct termios		t;
+
+	if (!init_term(&t) || !init_query() || !read_char())
+		return ;
 }
