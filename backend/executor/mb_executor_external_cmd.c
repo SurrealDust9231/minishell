@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mb_executor_simple.c                               :+:      :+:    :+:   */
+/*   mb_executor_external_cmd.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 17:48:20 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/04/29 18:23:54 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/04/29 18:41:36 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	_mbes_execv(char **argv)
 	return (r);
 }
 
-int	mbe_simple_cmd(t_astree *node)
+int	mbe_external_cmd(t_astree *node)
 {
 	pid_t	child_pid;
 	int		status;

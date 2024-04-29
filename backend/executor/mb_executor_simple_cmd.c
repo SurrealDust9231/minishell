@@ -1,25 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mbe_simple_cmd_test.c                              :+:      :+:    :+:   */
+/*   mb_executor_simple_cmd.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 16:32:43 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/04/29 18:10:44 by chang-pa         ###   ########.fr       */
+/*   Created: 2024/04/29 18:41:58 by chang-pa          #+#    #+#             */
+/*   Updated: 2024/04/29 18:45:48 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unittests.h"
+#include "../includes/minishell_backend.h"
 
-int	mbes_test(int ac, char **av)
+void mbe_simple_cmd(t_astree *node)
 {
-	t_astree	*ast;
-
-	ft_ast_create(&ast);
-	ft_ast_init(ast, TK_COMMAND, ft_split(av[1], av[2][0]));
-	if (mbe_simple_cmd(ast) != 0)
-		return (-1);
-	ft_ast_destroy(&ast);
-	return (0);
+	(void) node;
+	// if (ft_strcmp(args[0], "pwd") == 0)
+	// {
+	// 	execute_pwd();
+	// }
+	// else if (ft_strcmp(args[0], "echo") == 0)
+	// {
+	// 	execute_echo(args);
+	// }
+	// else if (ft_strcmp(args[0], "cd") == 0)
+	// {
+	// 	execute_cd(args);
+	// }
+	// else
+	// {
+	//     // more commands
+	// }
 }

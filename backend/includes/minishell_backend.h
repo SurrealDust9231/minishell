@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 17:48:27 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/04/29 18:17:57 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/04/29 18:45:00 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <libftend.h>
 
 int		mbe_search_path(char **path, char *file_path);
-int		mbe_simple_cmd(t_astree *node);
+int		mbe_external_cmd(t_astree *node);
+void 	mbe_simple_cmd(t_astree *node);
 
 #endif
