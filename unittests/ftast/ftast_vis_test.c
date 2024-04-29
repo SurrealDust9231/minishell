@@ -1,34 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ast_vis.c                                       :+:      :+:    :+:   */
+/*   ftast_vis_test.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/28 21:19:14 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/04/29 14:18:12 by chang-pa         ###   ########.fr       */
+/*   Created: 2024/04/29 14:06:55 by chang-pa          #+#    #+#             */
+/*   Updated: 2024/04/29 14:19:40 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftast.h"
-#include <stdio.h>
+#include "unittests.h"
 
-void	ft_ast_vis(t_astree *ast, int p, int n)
+void	ftast_test(void)
 {
-	int	i;
+	t_astree	*ast;
+	t_astree	*node;
 
-	if (ast == NULL || p < 0 || n < 0)
-		return ;
-	i = 0;
-	while (i++ < p)
-		printf(" ");
-	if (ast->type == TK_NULL)
-		printf("N");
-	if (ast->type == TK_COMMAND)
-		printf("C");
-	if (ast->type == TK_PIPE)
-		printf("P");
-	printf("\n");
-	ft_ast_vis(ast->l, p - n, n / 2);
-	ft_ast_vis(ast->r, p + n, n / 2);
+	ft_ast_create(&ast);
+	ft_ast_init(ast, TK_PIPE, NULL);
+	ft_ast_create(&node);
+	ft_ast_init(node, TK_COMMAND, NULL);
+	ast->l = node;
+	ft_ast_create(&node);
+	ft_ast_init(node, TK_NULL, NULL);
+	ast->r = node;
+	ft_ast_vis(ast, 20, 10);
 }

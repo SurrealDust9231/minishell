@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 19:02:47 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/04/26 19:32:07 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/04/29 14:16:46 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <string.h>
 # include <unistd.h>
 # include <ctype.h>
+# include <libft.h>
+# include <libftast.h>
 
 # include <term.h>
 
@@ -38,5 +40,6 @@ bool	init_term(struct termios *t);
 bool	init_query(void);
 bool	read_char(void);
 void	ut_rl_handler(int signum);
+void	ftast_test(void);
 
 #endif

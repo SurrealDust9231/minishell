@@ -6,7 +6,7 @@
 #    By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/13 21:32:26 by chang-pa          #+#    #+#              #
-#    Updated: 2024/04/28 21:12:56 by chang-pa         ###   ########.fr        #
+#    Updated: 2024/04/29 14:04:48 by chang-pa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ LIBFTOBJS=ft_isalpha.o ft_isdigit.o ft_isalnum.o ft_isascii.o ft_isprint.o ft_st
 	ft_strlcpy.o ft_strlcat.o ft_atoi.o ft_strnstr.o ft_strdup.o ft_calloc.o \
 	ft_substr.o ft_strjoin.o ft_strtrim.o ft_split.o ft_itoa.o ft_strmapi.o \
 	ft_striteri.o ft_putchar_fd.o ft_putstr_fd.o ft_putendl_fd.o \
-	ft_putnbr_fd.o ft_strcmp.o ft_isspace.o ft_strndup.o
+	ft_putnbr_fd.o ft_strcmp.o ft_isspace.o ft_strndup.o \
+	ft_strncpy.o ft_strcpy.o ft_strcat.o
 
 all: $(NAME)
 

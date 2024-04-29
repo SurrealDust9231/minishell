@@ -6,7 +6,7 @@
 /*   By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 14:04:06 by saguayo-          #+#    #+#             */
-/*   Updated: 2024/04/29 12:52:20 by saguayo-         ###   ########.fr       */
+/*   Updated: 2024/04/29 14:38:31 by saguayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,64 +124,6 @@ void execute_cd(char **args)
         perror("cd");
     }
 }
-
-// int	main(void)
-// {
-// 	char	*line;
-// 	char	**av;
-// 	int		i;
-// 	int		j;
-
-// 	while (1)
-// 	{
-// 		line = readline("WRITE YOUR COMMAND: ");
-// 		if (line == NULL)
-// 			break ; // salir del bucle si readline no lee nada
-// 		if (ft_strcmp(line, "exit") == 0) // para salir
-// 		{
-// 			free(line);
-// 			break ;
-// 		}
-// 		// if (line)
-// 		// 	add_history(line);
-// 		av = custom_split(line);
-// 		if (!av)
-// 		{
-// 			free(line);
-// 			continue ;
-// 		}
-// 		i = 0;
-// 		while (av[i] != NULL)
-// 		{
-// 			char *expanded = expand_variables(av[i]);
-// 			free(av[i]);
-// 			av[i] = expanded;
-// 			i++;
-// 		}
-// 		printf("The line is: %s\n", line);
-// 		printf("Comand and args:\n");
-// 		i = 0;
-// 		while (av[i] != NULL)
-// 			printf("'%s'\n", av[i++]);
-// 		if (ft_strcmp(av[0], "pwd") == 0)
-// 		{
-// 			if (count_args(av) > 1)
-// 				printf("pwd: too many arguments\n");
-// 			else
-// 				execute_pwd();
-// 		}
-// 		else if (ft_strcmp(av[0], "echo") == 0)
-// 			execute_echo(av);
-// 		else if (ft_strcmp(av[0], "cd") == 0)
-// 			execute_cd(av);
-// 		i = 0;
-// 		while (av[i] != NULL)
-// 			free(av[i++]);
-// 		free(av);
-// 		free(line);
-// 	}
-// 	return (0);
-// }
 
 int main(void)
 {
