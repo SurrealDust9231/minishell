@@ -6,11 +6,11 @@
 /*   By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 14:04:06 by saguayo-          #+#    #+#             */
-/*   Updated: 2024/04/26 15:49:20 by saguayo-         ###   ########.fr       */
+/*   Updated: 2024/04/28 20:32:30 by saguayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishe
+#include "minishell.h"
 
 // UTILS START
 int	ft_strcmp(char *s1, char *s2)
@@ -62,14 +62,14 @@ int	count_args(char **array)
 	return (count);
 }
 // UTILS FINAL
-
 // COMMAN'S START
+
 // EXPAND THE $
-char *expand_variables(char *token)
+char	*expand_variables(char *token)
 {
-	int i = 0;
-	int result_idx = 0, in_single_quote = 0, in_double_quote = 0;
-	char *result = malloc(4096);
+	int		i = 0;
+	int		result_idx = 0, in_single_quote = 0, in_double_quote = 0;
+	char	*result = malloc(4096);
 
 	if (!result)
 		return (NULL);
@@ -80,16 +80,17 @@ char *expand_variables(char *token)
 			in_single_quote = !in_single_quote;
 			result[result_idx++] = token[i];
 			i++;
-			continue;
+			continue ;
 		}
 		if (token[i] == '\"' && !in_single_quote)
 		{
 			in_double_quote = !in_double_quote;
 			result[result_idx++] = token[i];
 			i++;
-			continue;
+			continue ;
 		}
-		if (token[i] == '$' && !in_single_quote && (in_double_quote || !ft_isspace(token[i + 1]))) {
+		if (token[i] == '$' && !in_single_quote && (in_double_quote || !ft_isspace(token[i + 1])))
+		{
 			char var_name[256];
 			int var_idx = 0;
 			i++;
@@ -124,7 +125,7 @@ void	execute_pwd(void)
 }                                                 
 
 // ECHO && ECHO -N
-void execute_echo(char **args)
+void	execute_echo(char **args)
 {
 	int i = 1;
 	int n_flag = 0;
@@ -136,10 +137,10 @@ void execute_echo(char **args)
 	}
 	while (args[i])
 	{
-		if ((args[i][0] == '\"' && args[i][strlen(args[i]) - 1] == '\"') ||
-			(args[i][0] == '\'' && args[i][strlen(args[i]) - 1] == '\''))
+		if ((args[i][0] == '\"' && args[i][ft_strlen(args[i]) - 1] == '\"') ||
+			(args[i][0] == '\'' && args[i][ft_strlen(args[i]) - 1] == '\''))
 		{
-			args[i][strlen(args[i]) - 1] = '\0';
+			args[i][ft_strlen(args[i]) - 1] = '\0';
 			printf("%s", args[i] + 1);
 		}
 		else
@@ -151,44 +152,107 @@ void execute_echo(char **args)
 	if (!n_flag)
 		printf("\n");
 }
+
 // CD
-void execute_cd(char **args)
+void	execute_cd(char **args)
 {
-    if (count_args(args) != 2)
+	if (count_args(args) != 2)
 	{
-        printf("cd: wrong number of arguments\n");
-        return;
-    }
-    if (chdir(args[1]) != 0)
+		printf("cd: wrong number of arguments\n");
+		return ;
+	}
+	if (chdir(args[1]) != 0)
 	{
-        perror("cd");
-    }
+		perror("cd");
+	}
 }
 
-int	main(void)
+// int		main(void)
+// {
+// 	char	*line;
+// 	char	**av;
+// 	int		i;
+// 	int		j;
+
+// 	while (1)
+// 	{
+// 		line = readline("WRITE YOUR COMMAND: ");
+// 		if (line == NULL)
+// 			break ; // salir del bucle si readline no lee nada
+// 		// if (line)
+// 		// 	add_history(line);
+// 		av = custom_split(line);
+// 		if (!av)
+// 		{
+// 			free(line);
+// 			continue ;
+// 		}
+// 		i = 0;
+// 		while (av[i] != NULL)
+// 		{
+// 			char *expanded = expand_variables(av[i]);
+// 			free(av[i]);
+// 			av[i] = expanded;
+// 			i++;
+// 		}
+// 		printf("The line is: %s\n", line);
+// 		printf("Comand and args:\n");
+// 		i = 0;
+// 		while (av[i] != NULL)
+// 			printf("'%s'\n", av[i++]);
+// 		if (ft_strcmp(av[0], "pwd") == 0)
+// 		{
+// 			if (count_args(av) > 1)
+// 				printf("pwd: too many arguments\n");
+// 			else
+// 				execute_pwd();
+// 		}
+// 		else if (ft_strcmp(av[0], "echo") == 0)
+// 			execute_echo(av);
+// 		else if (ft_strcmp(av[0], "cd") == 0)
+// 			execute_cd(av);
+// 		else if (ft_strcmp(line, "exit") == 0)
+// 		{
+// 			free(line);
+// 			break ;
+// 		}
+// 		i = 0;
+// 		while (av[i] != NULL)
+// 			free(av[i++]);
+// 		free(av);
+// 		free(line);
+// 	}
+// 	return (0);
+// }
+
+int main(void)
 {
-	char	*line;
-	char	**av;
-	int		i;
-	int		j;
+	char *line;
+	char **av;
+	t_node *ast;
+	int i;
 
 	while (1)
 	{
 		line = readline("WRITE YOUR COMMAND: ");
 		if (line == NULL)
-			break ; // salir del bucle si readline no lee nada
-		if (ft_strcmp(line, "exit") == 0) // para salir
-		{
-			free(line);
 			break ;
-		}
-		// if (line)
-		// 	add_history(line);
+		add_history(line);
 		av = custom_split(line);
 		if (!av)
 		{
 			free(line);
 			continue ;
+		}
+		// printf("The line is: %s\n", line);
+		// printf("Comand and args:\n");
+		// i = 0;
+		// while (av[i] != NULL)
+		// 	printf("%s\n", av[i++]);
+		if (ft_strcmp(line, "exit") == 0)
+		{
+			free(line);
+			break ;
 		}
 		i = 0;
 		while (av[i] != NULL)
@@ -198,27 +262,15 @@ int	main(void)
 			av[i] = expanded;
 			i++;
 		}
-		printf("The line is: %s\n", line);
-		printf("Comand and args:\n");
-		i = 0;
-		while (av[i] != NULL)
-			printf("'%s'\n", av[i++]);
-		if (ft_strcmp(av[0], "pwd") == 0)
+		int index = 0;
+		ast = parseCommands(av, &index);
+		if (ast)
 		{
-			if (count_args(av) > 1)
-				printf("pwd: too many arguments\n");
-			else
-				execute_pwd();
+			executeAST(ast);
+			// freeAST(ast);
 		}
-		else if (ft_strcmp(av[0], "echo") == 0)
-			execute_echo(av);
-		else if (ft_strcmp(av[0], "cd") == 0)
-			execute_cd(av);
-		i = 0;
-		while (av[i] != NULL)
-			free(av[i++]);
 		free(av);
 		free(line);
 	}
-	return (0);
+	return 0;
 }
