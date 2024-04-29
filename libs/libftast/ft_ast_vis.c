@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ast_create.c                                    :+:      :+:    :+:   */
+/*   ft_ast_vis.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/28 20:04:04 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/04/28 21:44:01 by chang-pa         ###   ########.fr       */
+/*   Created: 2024/04/28 21:19:14 by chang-pa          #+#    #+#             */
+/*   Updated: 2024/04/28 21:39:24 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftast.h"
+#include <stdio.h>
 
-int	ft_ast_create(t_astree **ast)
+void	ft_ast_vis(t_astree *ast)
 {
-	*ast = (t_astree *) malloc(sizeof(t_astree));
-	if (*ast == NULL)
-		return (-1);
-	(*ast)->data = NULL;
-	(*ast)->l = NULL;
-	(*ast)->r = NULL;
-	(*ast)->type = TK_NULL;
-	return (0);
+	printf("%p\n", ast);
+	if (ast == NULL)
+		return ;
+	if (ast->type == TK_NULL)
+		printf("(NULL)");
 }

@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 19:55:22 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/04/28 20:40:52 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/04/28 21:43:16 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ struct s_astree
 
 int		ft_ast_create(t_astree **ast);
 void	ft_ast_destroy(t_astree **ast);
+void	ft_ast_data_destroy(void *data, t_ttype type);
 void	ft_ast_init(t_astree *ast, t_ttype type, char **data);
+void	ft_ast_vis(t_astree *ast);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 21:37:06 by saguayo-          #+#    #+#             */
-/*   Updated: 2024/04/28 21:13:27 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/04/28 21:26:22 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <stdio.h>
 # include <fcntl.h>
-# include <libft.h>
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>

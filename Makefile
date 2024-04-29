@@ -6,7 +6,7 @@
 #    By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/21 00:28:11 by chang-pa          #+#    #+#              #
-#    Updated: 2024/04/28 21:17:52 by chang-pa         ###   ########.fr        #
+#    Updated: 2024/04/28 21:48:00 by chang-pa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ CC=cc
 CFLAGS=-Wall -Wextra -Werror
 
 NAME=minishell
-OBJS=main.o comsplit.o execute.o ast.o
+OBJS=main.o comsplit.o execute.o
 
 _SKOBJS=
 SKOBJS=$(_SKOBJS:%=ftsigkit/%)
@@ -27,10 +27,10 @@ LIBFA_DIR=libs/libftast
 LIBFA_FLAGS=-lftast -L$(LIBFA_DIR)
 
 FE_DIR=frontend
-FE_FLAGS=-lfminfront -L$(FE_DIR)
+FE_FLAGS=-lminfront -L$(FE_DIR)
 
 BE_DIR=backend
-BE_FLAGS=-lfminback -L$(BE_DIR)
+BE_FLAGS=-lminback -L$(BE_DIR)
 
 RL_FLAGS=-lreadline
 
