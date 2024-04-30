@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+         #
+#    By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/21 00:28:11 by chang-pa          #+#    #+#              #
-#    Updated: 2024/04/30 18:00:46 by chang-pa         ###   ########.fr        #
+#    Updated: 2024/04/30 18:44:40 by saguayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ CC=cc
 CFLAGS=-Wall -Wextra -Werror
 
 NAME=minishell
-OBJS=main.o comsplit.o
+OBJS=main.o
 
 _SKOBJS=
 SKOBJS=$(_SKOBJS:%=ftsigkit/%)

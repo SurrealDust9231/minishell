@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
+/*   By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 21:37:06 by saguayo-          #+#    #+#             */
-/*   Updated: 2024/04/30 13:23:12 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/04/30 18:54:12 by saguayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,5 @@
 # include <libftast.h>
 # include <minishell_frontend.h>
 # include <minishell_backend.h>
-
-typedef void (*node_handler)(t_astree *);
-
-typedef struct s_node_handler_mapping
-{
-	t_ttype			type;
-	node_handler	handler;
-}	t_node_handler_mapping;
-
-char	**custom_split(char *str);
-
-void	execute_pwd(void);
-void	execute_cd(char **args);
-void	execute_echo(char **args);
-void	executeAST(t_astree *node);
 
 #endif
