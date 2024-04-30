@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 17:48:20 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/04/30 16:31:26 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/04/30 17:44:34 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ static int	_mbes_execv(char **argv)
 	if (ft_strchr(argv[0], '/'))
 	{
 		if (execve(argv[0], argv, NULL) != 0)
-			return (-1);
+			return (ft_error_return("_mbes_execv1", -1));
 	}
 	else
 	{
 		if (mbe_search_path(&path, argv[0]) != 0)
-			return (-1);
+			return (ft_error_return("_mbes_execv2", -1));
 		if (!path)
 			return (0);
 		if (execve(path, argv, NULL) != 0)
-			return (-1);
+			return (ft_error_return("_mbes_execv3", -1));
 		free(path);
 	}
 	return (0);
@@ -45,7 +45,7 @@ int	mbe_external_cmd(char **argv)
 	if (child_pid == 0)
 	{
 		_mbes_execv(argv);
-		ft_error_return("error: failed to execute command: ", -1);
+		ft_error_return("mbe_external_cmd1", -1);
 		if (errno == ENOEXEC)
 			exit(126);
 		else if (errno == ENOENT)
@@ -54,7 +54,7 @@ int	mbe_external_cmd(char **argv)
 			exit(EXIT_FAILURE);
 	}
 	else if (child_pid < 0)
-		return (ft_error_return("error: failed to fork command: ", -1));
+		return (ft_error_return("mbe_external_cmd2", -1));
 	status = 0;
 	waitpid(child_pid, &status, 0);
 	return (0);

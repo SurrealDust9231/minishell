@@ -6,7 +6,7 @@
 #    By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/21 00:28:11 by chang-pa          #+#    #+#              #
-#    Updated: 2024/04/30 17:40:38 by chang-pa         ###   ########.fr        #
+#    Updated: 2024/04/30 18:00:46 by chang-pa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ CC=cc
 CFLAGS=-Wall -Wextra -Werror
 
 NAME=minishell
-OBJS=main.o comsplit.o execute.o
+OBJS=main.o comsplit.o
 
 _SKOBJS=
 SKOBJS=$(_SKOBJS:%=ftsigkit/%)

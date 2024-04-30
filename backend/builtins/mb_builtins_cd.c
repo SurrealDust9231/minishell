@@ -1,20 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mb_executor_simple_cmd.c                           :+:      :+:    :+:   */
+/*   mb_builtins_cd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 18:41:58 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/04/30 17:47:52 by chang-pa         ###   ########.fr       */
+/*   Created: 2024/04/30 17:50:14 by chang-pa          #+#    #+#             */
+/*   Updated: 2024/04/30 17:58:11 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_backend.h"
 
-int	mbe_simple_cmd(t_astree *node)
+int	_mbb_cd_count_args(char **array)
 {
-	if (mbe_external_cmd(node->data) != 0)
-		return (ft_error_return("mbe_external_cmd", -1));
+	int	count;
+
+	count = 0;
+	while (array && *array++)
+		count++;
+	return (count);
+}
+
+int	mbb_cd(char **args)
+{
+	if (_mbb_cd_count_args(args) != 2)
+	{
+		printf("cd: wrong number of arguments\n");
+		return (-1);
+	}
+	if (chdir(args[1]) != 0)
+	{
+		perror("cd");
+	}
 	return (0);
 }

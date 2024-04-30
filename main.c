@@ -6,21 +6,12 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 14:04:06 by saguayo-          #+#    #+#             */
-/*   Updated: 2024/04/30 16:24:54 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/04/30 17:57:49 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	count_args(char **array)
-{
-	int	count;
-
-	count = 0;
-	while (array && *array++)
-		count++;
-	return (count);
-}
 // UTILS FINAL
 
 // COMMAN'S START
@@ -70,59 +61,6 @@ char *expand_variables(char *token)
 	}
 	result[result_idx] = '\0';
 	return result;
-}
-
-// PWD
-void	execute_pwd(void)
-{
-	char	cwd[1024];
-
-	if (getcwd(cwd, sizeof(cwd)) != NULL)
-		printf("%s\n", cwd);
-	else
-		perror("getcwd() error");
-}
-
-// ECHO && ECHO -N
-void execute_echo(char **args)
-{
-	int i = 1;
-	int n_flag = 0;
-
-	if (args[1] && ft_strcmp(args[1], "-n") == 0)
-	{
-		n_flag = 1;
-		i = 2;
-	}
-	while (args[i])
-	{
-		if ((args[i][0] == '\"' && args[i][strlen(args[i]) - 1] == '\"') ||
-			(args[i][0] == '\'' && args[i][strlen(args[i]) - 1] == '\''))
-		{
-			args[i][strlen(args[i]) - 1] = '\0';
-			printf("%s", args[i] + 1);
-		}
-		else
-			printf("%s", args[i]);
-		if (args[i + 1] != NULL)
-			printf(" ");
-		i++;
-	}
-	if (!n_flag)
-		printf("\n");
-}
-// CD
-void execute_cd(char **args)
-{
-    if (count_args(args) != 2)
-	{
-        printf("cd: wrong number of arguments\n");
-        return;
-    }
-    if (chdir(args[1]) != 0)
-	{
-        perror("cd");
-    }
 }
 
 int main(void)

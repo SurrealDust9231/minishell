@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 17:53:01 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/04/30 12:55:21 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/04/30 17:47:23 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	mbe_search_path(char **path, char *file_path)
 	{
 		*path = _mbesp_get_subcmd(i, file_path, env_path);
 		if (*path == NULL)
-			return (-1);
+			return (ft_error_return("mbe_search_path1", -1));
 		if (stat(*path, &st) == 0 && S_ISREG(st.st_mode))
 			return (0);
 		free(*path);

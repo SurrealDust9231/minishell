@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mb_executor_simple_cmd.c                           :+:      :+:    :+:   */
+/*   mb_builtins_pwd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 18:41:58 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/04/30 17:47:52 by chang-pa         ###   ########.fr       */
+/*   Created: 2024/04/30 17:50:14 by chang-pa          #+#    #+#             */
+/*   Updated: 2024/04/30 17:58:36 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_backend.h"
 
-int	mbe_simple_cmd(t_astree *node)
+int	mbb_pwd(char **args)
 {
-	if (mbe_external_cmd(node->data) != 0)
-		return (ft_error_return("mbe_external_cmd", -1));
+	char	cwd[1024];
+
+	(void) args;
+	if (getcwd(cwd, sizeof(cwd)) != NULL)
+		printf("%s\n", cwd);
+	else
+		perror("getcwd() error");
 	return (0);
 }

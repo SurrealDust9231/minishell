@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 17:48:27 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/04/30 13:20:58 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/04/30 17:56:40 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,15 @@ int		mbe_redirect_out(t_astree *node);
 int		mbe_redirect_append(t_astree *node);
 int		mbe_redirect_in(t_astree *node);
 int		mbe_redirect_heredoc(t_astree *node);
+
 int		mbe_search_path(char **path, char *file_path);
 int		mbe_external_cmd(char **argv);
+int		mbb_cd(char **args);
+int		mbb_echo(char **args);
+int		mbb_env(char **args);
+int		mbb_exit(char **args);
+int		mbb_export(char **args);
+int		mbb_pwd(char **args);
+int		mbb_unset(char **args);
 
 #endif
