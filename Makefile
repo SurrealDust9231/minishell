@@ -6,7 +6,7 @@
 #    By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/21 00:28:11 by chang-pa          #+#    #+#              #
-#    Updated: 2024/04/29 18:06:23 by chang-pa         ###   ########.fr        #
+#    Updated: 2024/04/30 17:40:38 by chang-pa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,7 @@ fclean: clean
 	@make -C $(LIBFEND_DIR) fclean
 	@make -C $(FE_DIR) fclean
 	@make -C $(BE_DIR) fclean
+	@make -C unittests fclean
 	@rm -f $(NAME)
 
 clean:
@@ -68,6 +69,7 @@ clean:
 	@make -C $(LIBFEND_DIR) clean
 	@make -C $(FE_DIR) clean
 	@make -C $(BE_DIR) clean
+	@make -C unittests clean
 	@rm -f $(OBJS)
 
 .PHONY: all re $(NAME) fclean clean

@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 14:04:06 by saguayo-          #+#    #+#             */
-/*   Updated: 2024/04/30 13:20:30 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/04/30 16:24:54 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,9 +138,11 @@ int main(void)
 		if (line == NULL)
 			break ;
 		add_history(line);
+		printf("test\n");
 		av = custom_split(line);
 		if (!av)
 		{
+			printf("test\n");
 			free(line);
 			continue ;
 		}

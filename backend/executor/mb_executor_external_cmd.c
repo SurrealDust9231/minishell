@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 17:48:20 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/04/30 12:48:24 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/04/30 16:31:26 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 static int	_mbes_execv(char **argv)
 {
 	char	*path;
-	int		r;
 
-	r = 0;
 	if (ft_strchr(argv[0], '/'))
 	{
 		if (execve(argv[0], argv, NULL) != 0)
@@ -33,7 +31,7 @@ static int	_mbes_execv(char **argv)
 			return (-1);
 		free(path);
 	}
-	return (r);
+	return (0);
 }
 
 int	mbe_external_cmd(char **argv)

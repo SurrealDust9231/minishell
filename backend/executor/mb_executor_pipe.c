@@ -3,62 +3,67 @@
 /*                                                        :::      ::::::::   */
 /*   mb_executor_pipe.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 18:55:54 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/04/30 16:27:37 by saguayo-         ###   ########.fr       */
+/*   Updated: 2024/04/30 17:31:55 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_backend.h"
 
-int mbe_pipe(t_astree *node)
+static int	_mbe_pipe_left(t_astree *left, pid_t pid, int fds[2])
 {
-	int fds[2];
-	pid_t pid1, pid2;
-	int status;
-
-	if (pipe(fds) == -1)
-	{
-		perror("pipe");
-		return (-1);
-	}
-	pid1 = fork();
-	if (pid1 == -1)
-	{
-		perror("fork");
-		return (-1);
-	}
-	if (pid1 == 0)
+	if (pid == 0)
 	{
 		close(fds[0]);
 		dup2(fds[1], STDOUT_FILENO);
 		close(fds[1]);
-		mbe_execute_node(node->l);
+		mbe_execute_node(left);
 		exit(EXIT_SUCCESS);
 	}
-	else
+	else if (pid < 0)
+		return (ft_error_return("_mbe_pipe_left: ", -1));
+	return (0);
+}
+
+static int	_mbe_pipe_right(t_astree *right, pid_t pid, int fds[2])
+{
+	if (pid == 0)
 	{
-		pid2 = fork();
-		if (pid2 == -1)
+		close(fds[1]);
+		dup2(fds[0], STDIN_FILENO);
+		close(fds[0]);
+		mbe_execute_node(right);
+		exit(EXIT_SUCCESS);
+	}
+	else if (pid < 0)
+		return (ft_error_return("_mbe_pipe_right: ", -1));
+	return (0);
+}
+
+int	mbe_pipe(t_astree *node)
+{
+	int		fds[2];
+	pid_t	pid[2];
+	int		status;
+
+	if (pipe(fds) == -1)
+		return (ft_error_return("mbe_pipe1: ", -1));
+	pid[0] = fork();
+	if (pid[0] < 1 && _mbe_pipe_left(node->l, pid[0], fds) != 0)
+		return (ft_error_return("mbe_pipe2: ", -1));
+	else if (pid[0] > 0)
+	{
+		pid[1] = fork();
+		if (pid[1] < 1 && _mbe_pipe_right(node->r, pid[1], fds) != 0)
+			return (ft_error_return("mbe_pipe3: ", -1));
+		else if (pid[1] > 0)
 		{
-			perror("fork");
-			return (-1);
-		}
-		if (pid2 == 0)
-		{
-			close(fds[1]);
-			dup2(fds[0], STDIN_FILENO);
 			close(fds[0]);
-			mbe_execute_node(node->r);
-			exit(EXIT_SUCCESS);
-		}
-		else
-		{
-			close(fds[0]);
 			close(fds[1]);
-			waitpid(pid1, &status, 0);
-			waitpid(pid2, &status, 0);
+			waitpid(pid[0], &status, 0);
+			waitpid(pid[1], &status, 0);
 		}
 	}
 	return (0);
