@@ -6,11 +6,11 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 17:48:20 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/04/29 18:41:36 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/04/30 12:48:24 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell_backend.h"
+#include "minishell_backend.h"
 
 static int	_mbes_execv(char **argv)
 {
@@ -36,17 +36,17 @@ static int	_mbes_execv(char **argv)
 	return (r);
 }
 
-int	mbe_external_cmd(t_astree *node)
+int	mbe_external_cmd(char **argv)
 {
 	pid_t	child_pid;
 	int		status;
 
-	if (!node)
+	if (!argv)
 		return (0);
 	child_pid = fork();
 	if (child_pid == 0)
 	{
-		_mbes_execv(node->data);
+		_mbes_execv(argv);
 		ft_error_return("error: failed to execute command: ", -1);
 		if (errno == ENOEXEC)
 			exit(126);

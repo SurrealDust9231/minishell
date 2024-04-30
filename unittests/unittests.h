@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 19:02:47 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/04/29 18:43:38 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/04/30 12:49:26 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@
 void	ftast_test(void);
 void	ncurses_test(void);
 void	readline_test(void);
-int		mbe_external_cmd_test(int ac, char **av);
+int		mbe_pipe_test(void);
+int		mbe_external_cmd_test(void);
 
 #endif

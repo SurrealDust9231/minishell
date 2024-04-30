@@ -6,7 +6,7 @@
 #    By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/21 00:28:11 by chang-pa          #+#    #+#              #
-#    Updated: 2024/04/29 18:43:48 by chang-pa         ###   ########.fr        #
+#    Updated: 2024/04/30 09:45:09 by chang-pa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ OBJS=unittests.o
 _FAOBJS=ftast_vis_test.o
 FAOBJS=$(_FAOBJS:%=ftast/%)
 
-_EXOBJS=mbe_external_cmd_test.o
+_EXOBJS=mbe_external_cmd_test.o mbe_pipe_test.o
 _NCOBJS=ncurses_test.o
 _RLOBJS=readline_test.o
 BEOBJS=$(_EXOBJS:%=executor/%) $(_RLOBJS:%=readline/%) $(_NCOBJS:%=ncurses/%)

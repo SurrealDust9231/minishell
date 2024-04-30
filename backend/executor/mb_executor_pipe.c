@@ -1,36 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mb_executor_simple_cmd.c                           :+:      :+:    :+:   */
+/*   mb_executor_pipe.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 18:41:58 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/04/30 12:55:14 by chang-pa         ###   ########.fr       */
+/*   Created: 2024/04/29 18:55:54 by chang-pa          #+#    #+#             */
+/*   Updated: 2024/04/30 13:16:57 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_backend.h"
 
-int mbe_simple_cmd(t_astree *node)
+int mbe_pipe(t_astree *node)
 {
-	if (mbe_external_cmd(node->data) != 0)
-		return (-1);
-	// if (ft_strcmp(args[0], "pwd") == 0)
-	// {
-	// 	execute_pwd();
-	// }
-	// else if (ft_strcmp(args[0], "echo") == 0)
-	// {
-	// 	execute_echo(args);
-	// }
-	// else if (ft_strcmp(args[0], "cd") == 0)
-	// {
-	// 	execute_cd(args);
-	// }
-	// else
-	// {
-	//     // more commands
-	// }
+	int fds[2];
+
+	pipe(fds);
+	if (fork() == 0)
+	{
+		dup2(fds[1], STDOUT_FILENO);
+		close(fds[0]);
+		mbe_execute_node(node->l);
+		exit(0);
+	}
+	else
+	{
+		dup2(fds[0], STDIN_FILENO);
+		close(fds[1]);
+		wait(NULL);
+		mbe_execute_node(node->r);
+	}
 	return (0);
 }

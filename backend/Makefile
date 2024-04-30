@@ -6,7 +6,7 @@
 #    By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/13 21:32:26 by chang-pa          #+#    #+#              #
-#    Updated: 2024/04/29 18:44:09 by chang-pa         ###   ########.fr        #
+#    Updated: 2024/04/30 13:18:53 by chang-pa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ NAME=libminback.a
 
 INC=-Iincludes
 
-_EOBJS=mb_executor_simple_cmd.o mb_executor_search_path.o mb_executor_external_cmd.o
+_EOBJS=mb_executor_simple_cmd.o mb_executor_search_path.o mb_executor_external_cmd.o \
+	mb_executor_pipe.o mb_executor_execute_node.o mb_executor_redirection.o
 EOBJS=$(_EOBJS:%=executor/%)
 
 _LIBS_INC=libft libftast libftend

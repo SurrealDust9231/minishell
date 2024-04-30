@@ -6,11 +6,11 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 17:53:01 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/04/29 18:17:48 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/04/30 12:55:21 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell_backend.h"
+#include "minishell_backend.h"
 
 static char	*_mbesp_get_subcmd(size_t i[2], char *file_path, char *env_path)
 {

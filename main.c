@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 14:04:06 by saguayo-          #+#    #+#             */
-/*   Updated: 2024/04/29 14:38:31 by saguayo-         ###   ########.fr       */
+/*   Updated: 2024/04/30 13:20:30 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,8 @@ int main(void)
 		ast = parseCommands(av, &index);
 		if (ast)
 		{
-			executeAST(ast);
+
+			mbe_execute_node(ast);
 			// freeAST(ast);
 		}
 		free(av);
