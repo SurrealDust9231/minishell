@@ -6,7 +6,7 @@
 #    By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/13 21:32:26 by chang-pa          #+#    #+#              #
-#    Updated: 2024/04/30 18:51:15 by saguayo-         ###   ########.fr        #
+#    Updated: 2024/05/01 19:03:20 by saguayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,10 @@ NAME=libminfront.a
 
 INC=includes
 
-_POBJS=parse_commands.o
+_POBJS=parse_commands.o parse_utils.o
 POBJS=$(_POBJS:%=parsing/%)
 
-_LOBJS=split.o expand.o
+_LOBJS=split.o split_utils.o expand.o 
 LOBJS=$(_LOBJS:%=lexer/%)
 
 LIBFT_DIR=../libs/libft
