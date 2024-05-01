@@ -6,64 +6,86 @@
 /*   By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 18:46:16 by saguayo-          #+#    #+#             */
-/*   Updated: 2024/04/30 19:39:27 by saguayo-         ###   ########.fr       */
+/*   Updated: 2024/05/01 14:25:32 by saguayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell_frontend.h"
 
-char	*expand_variables(char *token)
+int	quote_state(int current_state, int in_other_quote)
 {
-	int		i;
-	int		result_idx;
-	int		in_single_quote;
-	int		in_double_quote;
-	char	*result;
-	char	*var_value;
+	if (!in_other_quote)
+		return (!current_state);
+	return (current_state);
+}
+
+void	copy_var_value(char *result, int *result_idx, const char *var_value)
+{
+	while (*var_value)
+		result[(*result_idx)++] = *var_value++;
+}
+
+int	variable_expansion(const char *token, int *i, char *result, int *result_idx)
+{
 	char	var_name[256];
 	int		var_idx;
+	char	*var_value;
 
-	i = 0;
-	result_idx = 0;
-	in_single_quote = 0;
-	in_double_quote = 0;
-	result = malloc(4096);
 	var_idx = 0;
-	if (!result)
-		return (NULL);
-	while (token[i])
+	while (ft_isalnum(token[*i]) || token[*i] == '_')
+		var_name[var_idx++] = token[(*i)++];
+	var_name[var_idx] = '\0';
+	(*i)--;
+	var_value = getenv(var_name);
+	if (var_value)
+		copy_var_value(result, result_idx, var_value);
+	return (*i);
+}
+
+void	handle_char(t_expantion_context *ctx)
+{
+	if (ctx->token[ctx->i] == '\'' && !ctx->in_double_quote)
 	{
-		if (token[i] == '\'' && !in_double_quote)
-		{
-			in_single_quote = !in_single_quote;
-			i++;
-			continue ;
-		}
-		if (token[i] == '\"' && !in_single_quote)
-		{
-			in_double_quote = !in_double_quote;
-			i++;
-			continue ;
-		}
-		if (token[i] == '$' && !in_single_quote
-			&& (in_double_quote || !ft_isspace(token[i + 1])))
-		{
-			i++;
-			while (ft_isalnum(token[i]) || token[i] == '_')
-				var_name[var_idx++] = token[i++];
-			var_name[var_idx] = '\0';
-			i--;
-			var_value = getenv(var_name);
-			if (var_value)
-			{
-				strcpy(&result[result_idx], var_value);
-				result_idx += ft_strlen(var_value);
-			}
-		}
-		else
-			result[result_idx++] = token[i];
-		i++;
+		ctx->in_single_quote = quote_state(ctx->in_single_quote,
+				ctx->in_double_quote);
+		ctx->i++;
 	}
-	result[result_idx] = '\0';
-	return (result);
+	else if (ctx->token[ctx->i] == '\"' && !ctx->in_single_quote)
+	{
+		ctx->in_double_quote = quote_state(ctx->in_double_quote,
+				ctx->in_single_quote);
+		ctx->i++;
+	}
+	else if (ctx->token[ctx->i] == '$' && !ctx->in_single_quote
+		&& (ctx->in_double_quote || !ft_isspace(ctx->token[ctx->i + 1])))
+	{
+		ctx->i++;
+		ctx->i = variable_expansion(ctx->token, &ctx->i,
+				ctx->result, &ctx->result_idx);
+	}
+	else
+	{
+		ctx->result[ctx->result_idx++] = ctx->token[ctx->i];
+		ctx->i++;
+	}
+}
+
+char	*expand_variables(char *token)
+{
+	t_expantion_context	ctx;
+
+	ctx.i = 0;
+	ctx.result_idx = 0;
+	ctx.in_single_quote = 0;
+	ctx.in_double_quote = 0;
+	ctx.result = malloc(4096);
+	ctx.token = token;
+	if (!ctx.result)
+		return (NULL);
+	while (token[ctx.i])
+	{
+		handle_char(&ctx);
+	}
+	ctx.result[ctx.result_idx] = '\0';
+	return (ctx.result);
 }

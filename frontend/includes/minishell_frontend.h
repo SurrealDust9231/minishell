@@ -6,7 +6,7 @@
 /*   By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 17:48:27 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/04/30 19:21:09 by saguayo-         ###   ########.fr       */
+/*   Updated: 2024/05/01 14:23:11 by saguayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,15 @@ typedef struct s_split_state
 	int		i;
 }			t_split_state;
 
-typedef struct s_expansion_state
+typedef struct s_expantion_context
 {
-	char	*result;
-	char	var_name[256];
 	int		i;
 	int		result_idx;
-	int		var_idx;
 	int		in_single_quote;
 	int		in_double_quote;
-}			t_expansion_state;
+	char	*result;
+	char	*token;
+}	t_expantion_context;
 
 char		**custom_split(char *str);
 char		*expand_variables(char *token);
