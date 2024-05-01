@@ -5,41 +5,41 @@
 #                                                     +:+ +:+         +:+      #
 #    By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/02/13 21:32:26 by chang-pa          #+#    #+#              #
-#    Updated: 2024/04/30 20:45:31 by chang-pa         ###   ########.fr        #
+#    Created: 2024/04/30 20:21:30 by chang-pa          #+#    #+#              #
+#    Updated: 2024/04/30 20:51:35 by chang-pa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC=cc
 CFLAGS=-Wall -Wextra -Werror
-AR=ar
-ARFLAGS=rcs
 
-NAME=libminback.a
+NAME=exit
 
-INC=-Iincludes
+OBJS=ft_exit.o
 
-_EOBJS=mb_executor_simple_cmd.o mb_executor_search_path.o \
-	mb_executor_pipe.o mb_executor_execute_node.o mb_executor_redirection.o
-EOBJS=$(_EOBJS:%=executor/%)
+LIBS_DIR=../../libs
+LIBFT_DIR=$(LIBS_DIR)/libft
+LIBFA_DIR=$(LIBS_DIR)/libftast
+LIBFEND_DIR=$(LIBS_DIR)/libftend
+LIBS_FLAGS=-lft -L$(LIBFT_DIR) -lftast -L$(LIBFA_DIR) -lftend -L$(LIBFEND_DIR)
+LIBS_INC=-I$(LIBFT_DIR) -I$(LIBFA_DIR) -I$(LIBFEND_DIR)
 
-_LIBS_INC=libft libftast libftend
-LIBS_INC=$(_LIBS_INC:%=-I../libs/%)
+BIN_DIR=../bin
 
 all: $(NAME)
 
 re: fclean all
 
-$(NAME): $(EOBJS)
-	$(AR) $(ARFLAGS) $@ $(EOBJS)
+$(NAME): $(OBJS)
+	@$(CC) $(CFLAGS) -o $(BIN_DIR)/$@ $(OBJS) $(LIBS_FLAGS)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -o $@ -c $< $(INC) $(LIBS_INC)
+	@$(CC) $(CFLAGS) -o $@ -c $< -I. $(LIBS_INC)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(BIN_DIR)/$(NAME)
 
 clean:
-	rm -f $(EOBJS)
+	@rm -f $(OBJS)
 
-.PHONY: all re fclean clean $(NAME)
+.PHONY: all re $(NAME) fclean clean

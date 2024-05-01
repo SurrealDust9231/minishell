@@ -3,12 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+         #
+#    By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/21 00:28:11 by chang-pa          #+#    #+#              #
-#    Updated: 2024/04/30 18:44:40 by saguayo-         ###   ########.fr        #
+#    Updated: 2024/04/30 21:03:26 by chang-pa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+ROOT_DIR:=$(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
 CC=cc
 CFLAGS=-Wall -Wextra -Werror
@@ -16,9 +18,7 @@ CFLAGS=-Wall -Wextra -Werror
 NAME=minishell
 OBJS=main.o
 
-_SKOBJS=
-SKOBJS=$(_SKOBJS:%=ftsigkit/%)
-SK_DIR=ftsigkit
+BTIN_DIR=builtins
 
 LIBS_DIR=libs
 LIBFT_DIR=$(LIBS_DIR)/libft
@@ -49,6 +49,7 @@ $(NAME): $(OBJS)
 	@make -C $(LIBFEND_DIR)
 	@make -C $(FE_DIR)
 	@make -C $(BE_DIR)
+	@make -C $(BTIN_DIR)
 	$(CC) -o $@ $(OBJS) $(FE_FLAGS) $(BE_FLAGS) $(LIBS_FLAGS) $(RL_FLAGS) $(NC_FLAGS)
 
 %.o: %.c
@@ -60,6 +61,7 @@ fclean: clean
 	@make -C $(LIBFEND_DIR) fclean
 	@make -C $(FE_DIR) fclean
 	@make -C $(BE_DIR) fclean
+	@make -C $(BTIN_DIR) fclean
 	@make -C unittests fclean
 	@rm -f $(NAME)
 
@@ -69,7 +71,11 @@ clean:
 	@make -C $(LIBFEND_DIR) clean
 	@make -C $(FE_DIR) clean
 	@make -C $(BE_DIR) clean
+	@make -C $(BTIN_DIR) clean
 	@make -C unittests clean
 	@rm -f $(OBJS)
 
-.PHONY: all re $(NAME) fclean clean
+rootd:
+	@echo $(ROOT_DIR)
+
+.PHONY: all re $(NAME) fclean clean rootd
