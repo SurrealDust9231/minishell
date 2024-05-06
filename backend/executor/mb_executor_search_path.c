@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 17:53:01 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/04/30 17:47:23 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/05 22:34:53 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	mbe_search_path(char **path, char *file_path)
 		if (stat(*path, &st) == 0 && S_ISREG(st.st_mode))
 			return (0);
 		free(*path);
+		*path = NULL;
 		i[0] = i[1];
 		if (env_path[i[1]] == ':')
 			i[0]++;

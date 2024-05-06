@@ -6,7 +6,7 @@
 #    By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/21 00:28:11 by chang-pa          #+#    #+#              #
-#    Updated: 2024/04/30 21:03:26 by chang-pa         ###   ########.fr        #
+#    Updated: 2024/05/05 23:08:30 by chang-pa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ $(NAME): $(OBJS)
 	@make -C $(LIBFA_DIR)
 	@make -C $(LIBFEND_DIR)
 	@make -C $(FE_DIR)
-	@make -C $(BE_DIR)
+	@ROOT_DIR=$(ROOT_DIR) make -C $(BE_DIR)
 	@make -C $(BTIN_DIR)
 	$(CC) -o $@ $(OBJS) $(FE_FLAGS) $(BE_FLAGS) $(LIBS_FLAGS) $(RL_FLAGS) $(NC_FLAGS)
 

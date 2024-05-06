@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 17:48:27 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/04/30 17:56:40 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/05 22:53:26 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@
 # include <libftast.h>
 # include <libftend.h>
 
+# ifndef MINISHELL_ROOT_DIR
+# define MINISHELL_ROOT_DIR NULL
+# endif
+
 int		mbe_execute_node(t_astree *node);
 int		mbe_simple_cmd(t_astree *node);
 int		mbe_pipe(t_astree *node);
@@ -34,13 +38,6 @@ int		mbe_redirect_in(t_astree *node);
 int		mbe_redirect_heredoc(t_astree *node);
 
 int		mbe_search_path(char **path, char *file_path);
-int		mbe_external_cmd(char **argv);
-int		mbb_cd(char **args);
-int		mbb_echo(char **args);
-int		mbb_env(char **args);
-int		mbb_exit(char **args);
-int		mbb_export(char **args);
-int		mbb_pwd(char **args);
-int		mbb_unset(char **args);
+int		mbe_search_builtin(char **path, char *file_path, char *builtin_path);
 
 #endif
