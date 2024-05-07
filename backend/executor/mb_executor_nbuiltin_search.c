@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mb_executor_search_path.c                          :+:      :+:    :+:   */
+/*   mb_executor_nbuiltin_search.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 17:53:01 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/05/05 22:34:53 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/06 23:09:23 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_backend.h"
 
-static char	*_mbesp_get_subcmd(size_t i[2], char *file_path, char *env_path)
+static char	*_mbens_get_subcmd(size_t i[2], char *file_path, char *env_path)
 {
 	int		flen;
 	char	*path;
@@ -34,7 +34,7 @@ static char	*_mbesp_get_subcmd(size_t i[2], char *file_path, char *env_path)
 	return (path);
 }
 
-int	mbe_search_path(char **path, char *file_path)
+int	mbe_nbuiltin_search(char **path, char *file_path)
 {
 	char		*env_path;
 	size_t		i[2];
@@ -46,9 +46,9 @@ int	mbe_search_path(char **path, char *file_path)
 	i[0] = 0;
 	while (env_path[i[0]])
 	{
-		*path = _mbesp_get_subcmd(i, file_path, env_path);
+		*path = _mbens_get_subcmd(i, file_path, env_path);
 		if (*path == NULL)
-			return (ft_error_return("mbe_search_path1", -1));
+			return (ft_error_return("mben_search", -1));
 		if (stat(*path, &st) == 0 && S_ISREG(st.st_mode))
 			return (0);
 		free(*path);

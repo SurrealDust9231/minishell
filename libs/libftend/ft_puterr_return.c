@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mb_builtins_pwd.c                                  :+:      :+:    :+:   */
+/*   ft_puterr_return.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/30 17:50:14 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/04/30 17:58:36 by chang-pa         ###   ########.fr       */
+/*   Created: 2024/05/06 21:29:04 by chang-pa          #+#    #+#             */
+/*   Updated: 2024/05/06 21:31:00 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_backend.h"
+#include "libftend.h"
 
-int	mbb_pwd(char **args)
+int	ft_puterr_return(const char *msg, int r)
 {
-	char	cwd[1024];
-
-	(void) args;
-	if (getcwd(cwd, sizeof(cwd)) != NULL)
-		printf("%s\n", cwd);
-	else
-		perror("getcwd() error");
-	return (0);
+	while (*msg != '\0')
+		write(STDERR_FILENO, msg++, 1);
+	return (r);
 }

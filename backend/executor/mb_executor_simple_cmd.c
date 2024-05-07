@@ -6,59 +6,47 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 17:48:20 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/05/05 22:53:10 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/06 23:32:27 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_backend.h"
 
-static int	_mbe_simple_cmd_execv(char **argv)
+static int	_mbes_cmd_return(char **path, int r)
 {
-	char	*path;
-
-	path = NULL;
-	if (ft_strchr(argv[0], '/'))
+	if (*path)
 	{
-		if (execve(argv[0], argv, NULL) != 0)
-			return (ft_error_return("_mbes_execv1", -1));
+		free(*path);
+		*path = NULL;
 	}
-	else
-	{
-		if (mbe_search_builtin(&path, argv[0], MINISHELL_ROOT_DIR) != 0)
-			return (ft_error_return("_mbes_execv2", -1));
-		if (!path && mbe_search_path(&path, argv[0]) != 0)
-			return (ft_error_return("_mbes_execv3", -1));
-		if (!path)
-			return (0);
-		if (execve(path, argv, NULL) != 0)
-			return (ft_error_return("_mbes_execv3", -1));
-		free(path);
-	}
-	return (0);
+	return (r);
 }
 
 int	mbe_simple_cmd(t_astree *node)
 {
-	pid_t	child_pid;
-	int		status;
+	char	*path;
+	char	**av;
 
-	if (!node->data)
-		return (0);
-	child_pid = fork();
-	if (child_pid == 0)
+	av = node->data;
+	path = NULL;
+	if (ft_strchr(av[0], '/'))
 	{
-		_mbe_simple_cmd_execv(node->data);
-		ft_error_return(((char **) node->data)[0], -1);
-		if (errno == ENOEXEC)
-			exit(126);
-		else if (errno == ENOENT)
-			exit(127);
-		else
-			exit(EXIT_FAILURE);
+		if (mbe_nbuiltin_cmd(node->data, path) != 0)
+			return (-1);
 	}
-	else if (child_pid < 0)
-		return (ft_error_return("mbes_cmd2", -1));
-	status = 0;
-	waitpid(child_pid, &status, 0);
-	return (0);
+	else if (mbe_builtin_search(&path, av[0], MINISHELL_ROOT_DIR) != 0)
+		return (ft_error_return("_mbes_cmd1", -1));
+	else if (path)
+	{
+		if (mbe_builtin_cmd(node->data, path) != 0)
+			return (_mbes_cmd_return(&path, -1));
+	}
+	else if (mbe_nbuiltin_search(&path, av[0]) != 0)
+		return (ft_error_return("_mbes_cmd2", -1));
+	else if (path)
+	{
+		if (mbe_nbuiltin_cmd(node->data, path) != 0)
+			return (_mbes_cmd_return(&path, -1));
+	}
+	return (_mbes_cmd_return(&path, 0));
 }
