@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mb_executor_nbuiltin_search.c                      :+:      :+:    :+:   */
+/*   mb_nbuiltin_search.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 17:53:01 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/05/06 23:09:23 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/13 18:13:51 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static char	*_mbens_get_subcmd(size_t i[2], char *file_path, char *env_path)
 	return (path);
 }
 
-int	mbe_nbuiltin_search(char **path, char *file_path)
+int	mbn_search(char **path, char *file_path)
 {
 	char		*env_path;
 	size_t		i[2];

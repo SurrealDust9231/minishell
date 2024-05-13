@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 17:48:20 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/05/06 23:51:20 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/13 18:14:35 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,19 +54,19 @@ int	mbe_simple_cmd(t_astree *node)
 	if (ft_strcmp(av[0], "cd") == 0)
 		return(_mbes_cmd_cd(node->data));
 	else if (ft_strchr(av[0], '/'))
-		return (mbe_nbuiltin_cmd(node->data, path));
-	else if (mbe_builtin_search(&path, av[0], MINISHELL_ROOT_DIR) != 0)
+		return (mbn_cmd(node->data, path));
+	else if (mbb_search(&path, av[0], MINISHELL_ROOT_DIR) != 0)
 		return (ft_error_return("_mbes_cmd1", -1));
 	else if (path)
 	{
-		if (mbe_builtin_cmd(node->data, path) != 0)
+		if (mbb_cmd(node->data, path) != 0)
 			return (_mbes_cmd_return(&path, -1));
 	}
-	else if (mbe_nbuiltin_search(&path, av[0]) != 0)
+	else if (mbn_search(&path, av[0]) != 0)
 		return (ft_error_return("_mbes_cmd2", -1));
 	else if (path)
 	{
-		if (mbe_nbuiltin_cmd(node->data, path) != 0)
+		if (mbn_cmd(node->data, path) != 0)
 			return (_mbes_cmd_return(&path, -1));
 	}
 	return (_mbes_cmd_return(&path, 0));

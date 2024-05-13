@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mb_executor_builtin_search.c                       :+:      :+:    :+:   */
+/*   mb_builtin_search.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 22:30:11 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/05/06 23:09:58 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/13 18:14:05 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static char	*_mbebs_get_subcmd(char *file_path, char *builtin_path)
 	return (path);
 }
 
-int	mbe_builtin_search(char **path, char *file_path, char *builtin_path)
+int	mbb_search(char **path, char *file_path, char *builtin_path)
 {
 	struct stat	st;
 

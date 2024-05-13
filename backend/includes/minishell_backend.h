@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 17:48:27 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/05/06 23:20:32 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/13 18:13:36 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ int		mbe_redirect_append(t_astree *node);
 int		mbe_redirect_in(t_astree *node);
 int		mbe_redirect_heredoc(t_astree *node);
 
-int		mbe_nbuiltin_search(char **path, char *file_path);
-int		mbe_nbuiltin_cmd(char **av, char *path);
-int		mbe_builtin_search(char **path, char *file_path, char *builtin_path);
-int		mbe_builtin_cmd(char **av, char *path);
+int		mbn_search(char **path, char *file_path);
+int		mbn_cmd(char **av, char *path);
+int		mbb_search(char **path, char *file_path, char *builtin_path);
+int		mbb_cmd(char **av, char *path);
 
 #endif
