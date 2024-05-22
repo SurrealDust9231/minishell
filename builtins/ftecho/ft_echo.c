@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 20:30:07 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/05/05 23:29:24 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/21 19:53:48 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	_ftecho_return(int r, int n_flag)
 {
 	if (!n_flag)
 		write(STDOUT_FILENO, "\n", 1);
-	return(r);
+	return (r);
 }
 
 static void	_ftecho_printstr(char *s, int q_flag)

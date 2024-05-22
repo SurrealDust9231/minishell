@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exit.c                                          :+:      :+:    :+:   */
+/*   ft_envlst_push.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/30 20:30:07 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/04/30 20:36:06 by chang-pa         ###   ########.fr       */
+/*   Created: 2024/05/21 19:43:38 by chang-pa          #+#    #+#             */
+/*   Updated: 2024/05/22 11:19:30 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_exit.h"
+#include "libftenvlst.h"
 
-int	main(int ac, char **av)
+void	ft_envlst_push(t_envlst **elst, t_envlst *node)
 {
-	(void) ac;
-	(void) av;
-	return (0);
+	if (node == NULL)
+		return ;
+	if (*elst == NULL)
+		*elst = node;
+	else if ((*elst)->next == NULL)
+	{
+		(*elst)->next = node;
+		node->prev = *elst;
+	}
+	else
+		ft_envlst_push(&(*elst)->next, node);
 }

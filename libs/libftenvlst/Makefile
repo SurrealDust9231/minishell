@@ -5,41 +5,32 @@
 #                                                     +:+ +:+         +:+      #
 #    By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/04/30 20:21:30 by chang-pa          #+#    #+#              #
-#    Updated: 2024/04/30 20:51:35 by chang-pa         ###   ########.fr        #
+#    Created: 2024/04/28 21:41:20 by chang-pa          #+#    #+#              #
+#    Updated: 2024/05/22 11:54:10 by chang-pa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC=cc
 CFLAGS=-Wall -Wextra -Werror
 
-NAME=exit
+AR=ar
+ARFLAGS=rcs
 
-OBJS=ft_exit.o
+NAME=libftenvlst.a
 
-LIBS_DIR=../../libs
-LIBFT_DIR=$(LIBS_DIR)/libft
-LIBFA_DIR=$(LIBS_DIR)/libftast
-LIBFEND_DIR=$(LIBS_DIR)/libftend
-LIBS_FLAGS=-lft -L$(LIBFT_DIR) -lftast -L$(LIBFA_DIR) -lftend -L$(LIBFEND_DIR)
-LIBS_INC=-I$(LIBFT_DIR) -I$(LIBFA_DIR) -I$(LIBFEND_DIR)
-
-BIN_DIR=../bin
+OBJS=ft_envlst_create.o ft_envlst_destroy.o ft_envlst_get.o ft_envlst_delone.o ft_envlst_push.o \
+	ft_envlst_showall.o ft_envlst_init.o
 
 all: $(NAME)
 
-re: fclean all
-
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) -o $(BIN_DIR)/$@ $(OBJS) $(LIBS_FLAGS)
+	$(AR) $(ARFLAGS) $@ $(OBJS)
 
 %.o: %.c
-	@$(CC) $(CFLAGS) -o $@ -c $< -I. $(LIBS_INC)
+	$(CC) $(CFLAGS) -o $@ -c $< -I.
 
 fclean: clean
-	@rm -f $(BIN_DIR)/$(NAME)
+	rm -f $(NAME)
 
 clean:
-	@rm -f $(OBJS)
-
-.PHONY: all re $(NAME) fclean clean
+	rm -f $(OBJS)

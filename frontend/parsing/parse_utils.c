@@ -6,7 +6,7 @@
 /*   By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 19:01:01 by saguayo-          #+#    #+#             */
-/*   Updated: 2024/05/01 19:03:45 by saguayo-         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:20:54 by saguayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_astree	*create_red_node(char **tokens,
 	ft_ast_init(right, type, args);
 	(*index)++;
 	right->l = left;
-	printf("Creating redirect node for %s\n", args[0]);
+	// printf("Creating redirect node for %s\n", args[0]);
 	return (right);
 }
 

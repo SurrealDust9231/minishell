@@ -6,7 +6,7 @@
 /*   By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 14:04:06 by saguayo-          #+#    #+#             */
-/*   Updated: 2024/05/22 19:23:34 by saguayo-         ###   ########.fr       */
+/*   Updated: 2024/05/22 19:25:27 by saguayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	handle_global_signals(void)
 	signal(SIGINT, handle_global_signal);
 }
 
-int	main(void)
+int	main(int _ac, char **_av, char **_envs)
 {
 	int			i;
 	int			index;
@@ -53,8 +53,13 @@ int	main(void)
 	char		**av;
 	char		*expanded;
 	t_astree	*ast;
+	t_minsh		minsh;
 
+	(void) _ac;
+	(void) _av;
 	handle_global_signals();
+	if (ft_envlst_init(&minsh.elst, _envs) != 0)
+		exit (ft_error_return("env init error", -1));
 	while (1)
 	{
 		line = readline("minishell&> ");
