@@ -3,17 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
+/*   By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 14:04:06 by saguayo-          #+#    #+#             */
-/*   Updated: 2024/05/01 22:20:21 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/22 19:23:34 by saguayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// COMMAN'S START
-// EXPAND THE $
+static void	handle_cmd_signal(int sig)
+{
+	if (sig == SIGINT)
+	{
+		printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+	}
+}
+
+static void	handle_global_signal(int sig)
+{
+	if (sig == SIGINT)
+	{
+		printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
+}
+
+void	handle_cmd_signals(void)
+{
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, handle_cmd_signal);
+}
+
+void	handle_global_signals(void)
+{
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, handle_global_signal);
+}
 
 int	main(void)
 {
@@ -24,28 +54,26 @@ int	main(void)
 	char		*expanded;
 	t_astree	*ast;
 
+	handle_global_signals();
 	while (1)
 	{
-		line = readline("WRITE YOUR COMMAND: ");
+		line = readline("minishell&> ");
 		if (line == NULL)
+		{
+			write(STDOUT_FILENO, "exit\n", 5);
 			break ;
+		}
 		add_history(line);
-		printf("test\n");
 		av = custom_split(line);
 		if (!av)
 		{
-			printf("test\n");
 			free(line);
 			continue ;
 		}
-		printf("The line is: %s\n", line);
-		printf("Comand and args:\n");
-		i = 0;
-		while (av[i] != NULL)
-			printf("%s\n", av[i++]);
 		if (ft_strcmp(line, "exit") == 0)
 		{
 			free(line);
+			free(av);
 			break ;
 		}
 		i = 0;
@@ -60,7 +88,9 @@ int	main(void)
 		ast = parse_commands(av, &index);
 		if (ast)
 		{
+			handle_cmd_signals();
 			mbe_execute_node(ast);
+			handle_global_signals();
 			ft_ast_destroy(&ast);
 		}
 		free(av);

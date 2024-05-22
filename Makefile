@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+         #
+#    By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/21 00:28:11 by chang-pa          #+#    #+#              #
-#    Updated: 2024/05/05 23:08:30 by chang-pa         ###   ########.fr        #
+#    Updated: 2024/05/22 19:21:09 by saguayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,9 @@ BE_DIR=backend
 BE_FLAGS=-lminback -L$(BE_DIR)
 BE_INC=-I$(BE_DIR)/includes
 
-RL_FLAGS=-lreadline
+# RL_FLAGS=-lreadline
+RL_FLAGS=-Lreadline -l ncurses readline/libhistory.a \
+readline/libreadline.a
 
 NC_FLAGS=-lncurses
 
