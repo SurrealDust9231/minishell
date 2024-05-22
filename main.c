@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 14:04:06 by saguayo-          #+#    #+#             */
-/*   Updated: 2024/05/01 22:20:21 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/22 12:25:20 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // COMMAN'S START
 // EXPAND THE $
 
-int	main(void)
+int	main(int _ac, char **_av, char **_envs)
 {
 	int			i;
 	int			index;
@@ -23,7 +23,12 @@ int	main(void)
 	char		**av;
 	char		*expanded;
 	t_astree	*ast;
+	t_minsh		minsh;
 
+	(void) _ac;
+	(void) _av;
+	if (ft_envlst_init(&minsh.elst, _envs) != 0)
+		exit (ft_error_return("env init error", -1));
 	while (1)
 	{
 		line = readline("WRITE YOUR COMMAND: ");

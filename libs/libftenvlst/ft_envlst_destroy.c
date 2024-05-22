@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 19:43:38 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/05/21 23:59:55 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/22 12:13:06 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	*ft_envlst_destroy_node(t_envlst **elst)
 {
 	if (*elst == NULL)
-		return ;
+		return (NULL);
 	if ((*elst)->key != NULL)
 		free((*elst)->key);
 	if ((*elst)->value != NULL)

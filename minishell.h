@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 21:37:06 by saguayo-          #+#    #+#             */
-/*   Updated: 2024/05/21 19:52:55 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/22 12:16:26 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,11 @@
 # include <libftenvlst.h>
 # include <minishell_frontend.h>
 # include <minishell_backend.h>
+
+typedef struct s_minsh	t_minsh;
+struct	s_minsh
+{
+	t_envlst	*elst;
+};
 
 #endif
