@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 19:43:38 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/05/21 20:00:27 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/21 23:29:11 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,21 @@ static int	_ft_envlst_delone_strcmp(char *s1, char *s2)
 
 void	ft_envlst_delone(t_envlst **elst, char *key)
 {
-	t_envlst	*prev;
-	t_envlst	*next;
+	t_envlst	*tmp;
 
 	if (*elst == NULL)
 		return ;
-	prev = *elst;
-	while (next)
+	if (_ft_envlst_delone_strcmp((*elst)->key, key) == 0)
 	{
-		if (_ft_envlst_delone_strcmp(next->key, key) == 0)
-		{
-
-		}
-		prev = next;
-		next = next->next;
+		tmp = *elst;
+		if (tmp->prev != NULL)
+			tmp->prev->next = tmp->next;
+		*elst = tmp->next;
+		if (tmp->next != NULL)
+			tmp->next->prev = tmp->prev;
+		ft_envlst_destroy_node(&tmp);
+		ft_envlst_delone(elst, key);
 	}
+	else
+		ft_envlst_delone(&(*elst)->next, key);
 }
