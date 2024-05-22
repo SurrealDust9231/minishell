@@ -6,7 +6,7 @@
 #    By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/21 00:28:11 by chang-pa          #+#    #+#              #
-#    Updated: 2024/05/05 23:08:30 by chang-pa         ###   ########.fr        #
+#    Updated: 2024/05/21 19:52:42 by chang-pa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,9 @@ LIBS_DIR=libs
 LIBFT_DIR=$(LIBS_DIR)/libft
 LIBFA_DIR=$(LIBS_DIR)/libftast
 LIBFEND_DIR=$(LIBS_DIR)/libftend
-LIBS_FLAGS=-lft -L$(LIBFT_DIR) -lftast -L$(LIBFA_DIR) -lftend -L$(LIBFEND_DIR)
-LIBS_INC=-I$(LIBFT_DIR) -I$(LIBFA_DIR) -I$(LIBFEND_DIR)
+LIBELST_DIR=$(LIBS_DIR)/libftenvlst
+LIBS_FLAGS=-lft -L$(LIBFT_DIR) -lftast -L$(LIBFA_DIR) -lftend -L$(LIBFEND_DIR) -ftenvlst -L$(LIBELST_DIR)
+LIBS_INC=-I$(LIBFT_DIR) -I$(LIBFA_DIR) -I$(LIBFEND_DIR) -I$(LIBELST_DIR)
 
 FE_DIR=frontend
 FE_FLAGS=-lminfront -L$(FE_DIR)

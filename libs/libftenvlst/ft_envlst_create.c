@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_envlst_create.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/06 21:37:06 by saguayo-          #+#    #+#             */
-/*   Updated: 2024/05/21 19:52:55 by chang-pa         ###   ########.fr       */
+/*   Created: 2024/05/21 19:43:38 by chang-pa          #+#    #+#             */
+/*   Updated: 2024/05/21 19:47:34 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libftenvlst.h"
 
-# include <stdio.h>
-# include <fcntl.h>
-# include <stdlib.h>
-# include <string.h>
-# include <unistd.h>
-# include <readline/readline.h>
-# include <term.h>
-# include <libft.h>
-# include <libftast.h>
-# include <libftenvlst.h>
-# include <minishell_frontend.h>
-# include <minishell_backend.h>
+t_envlst	*ft_envlst_create(void)
+{
+	t_envlst	*rt;
 
-#endif
+	rt = (t_envlst *) malloc(sizeof(t_envlst));
+	if (rt == NULL)
+		return (NULL);
+	rt->key = NULL;
+	rt->value = NULL;
+	rt->next = NULL;
+	return (rt);
+}

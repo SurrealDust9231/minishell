@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 17:48:27 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/05/15 10:35:07 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/21 19:53:36 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include <libftend.h>
 
 # ifndef MINISHELL_ROOT_DIR
-# define MINISHELL_ROOT_DIR NULL
+#  define MINISHELL_ROOT_DIR 0
 # endif
 
 int		mbe_execute_node(t_astree *node);
