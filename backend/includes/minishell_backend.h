@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 17:48:27 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/05/22 20:51:24 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/23 14:29:20 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int		mbb_cmd_cd(char **av, t_minsh *minsh);
 int		mbb_cmd_export(char **av, t_minsh *minsh);
 int		mbb_cmd_env(char **av, t_minsh *minsh);
 int		mbb_cmd_unset(char **av, t_minsh *minsh);
-int		mbb_cmd_exit(char **av);
+int		mbb_cmd_exit(char **av, t_minsh *minsh);
 int		mbb_cmd(char **av, char *path, t_minsh *minsh);
 
 #endif
