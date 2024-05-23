@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 14:04:06 by saguayo-          #+#    #+#             */
-/*   Updated: 2024/05/22 20:01:35 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/22 20:04:42 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	main(int _ac, char **_av, char **_envs)
 		i = 0;
 		while (av[i] != NULL)
 		{
-			expanded = expand_variables(av[i]);
+			expanded = expand_variables(av[i], &minsh);
 			free(av[i]);
 			av[i] = expanded;
 			i++;

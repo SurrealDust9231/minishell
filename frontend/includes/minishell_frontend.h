@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_frontend.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 17:48:27 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/05/01 19:02:15 by saguayo-         ###   ########.fr       */
+/*   Updated: 2024/05/22 20:07:12 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <sys/wait.h>
 # include <libft.h>
 # include <libftast.h>
+# include <libftenvlst.h>
 
 typedef struct s_split_state
 {
@@ -45,7 +46,7 @@ typedef struct s_expantion_context
 }	t_expantion_context;
 
 char		**custom_split(char *str);
-char		*expand_variables(char *token);
+char		*expand_variables(char *token, t_minsh *minsh);
 t_astree	*parse_commands(char **tokens, int *index);
 
 void		init_split_state(t_split_state *state);

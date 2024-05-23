@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 15:28:20 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/05/22 19:29:59 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/22 20:07:43 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ struct	s_envlst
 	char		*value;
 	t_envlst	*prev;
 	t_envlst	*next;
+};
+
+typedef struct s_minsh	t_minsh;
+struct	s_minsh
+{
+	t_envlst	*elst;
 };
 
 t_envlst	*ft_envlst_create(char *key, char *value);

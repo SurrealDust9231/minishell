@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 17:48:27 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/05/22 19:35:11 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/22 20:07:32 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,6 @@
 # ifndef MINISHELL_ROOT_DIR
 #  define MINISHELL_ROOT_DIR 0
 # endif
-
-typedef struct s_minsh	t_minsh;
-struct	s_minsh
-{
-	t_envlst	*elst;
-};
 
 int		mbe_execute_node(t_astree *node, t_minsh *minsh);
 int		mbe_simple_cmd(t_astree *node, t_minsh *minsh);

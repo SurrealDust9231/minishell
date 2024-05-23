@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 18:46:16 by saguayo-          #+#    #+#             */
-/*   Updated: 2024/05/01 18:37:35 by saguayo-         ###   ########.fr       */
+/*   Updated: 2024/05/22 20:08:00 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	copy_var_value(char *result, int *result_idx, const char *var_value)
 		result[(*result_idx)++] = *var_value++;
 }
 
-int	variable_expansion(const char *token, int *i, char *result, int *result_idx)
+int	variable_expansion(const char *token, int *i, char *result, int *result_idx, t_minsh *minsh)
 {
 	char	var_name[256];
 	int		var_idx;
@@ -36,7 +36,7 @@ int	variable_expansion(const char *token, int *i, char *result, int *result_idx)
 	while (ft_isalnum(token[*i]) || token[*i] == '_')
 		var_name[var_idx++] = token[(*i)++];
 	var_name[var_idx] = '\0';
-	var_value = getenv(var_name);
+	var_value = ft_envlst_get(minsh->elst, var_name);
 	if (var_value)
 		copy_var_value(result, result_idx, var_value);
 	if (token[*i] != '\0')
@@ -44,7 +44,7 @@ int	variable_expansion(const char *token, int *i, char *result, int *result_idx)
 	return (*i);
 }
 
-void	handle_char(t_expantion_context *ctx)
+void	handle_char(t_expantion_context *ctx, t_minsh *minsh)
 {
 	if (ctx->token[ctx->i] == '\'' && !ctx->in_double_quote)
 	{
@@ -62,7 +62,7 @@ void	handle_char(t_expantion_context *ctx)
 		&& (ctx->in_double_quote || !ft_isspace(ctx->token[ctx->i + 1])))
 	{
 		ctx->i = variable_expansion(ctx->token, &ctx->i,
-				ctx->result, &ctx->result_idx);
+				ctx->result, &ctx->result_idx, minsh);
 	}
 	else
 	{
@@ -71,7 +71,7 @@ void	handle_char(t_expantion_context *ctx)
 	}
 }
 
-char	*expand_variables(char *token)
+char	*expand_variables(char *token, t_minsh *minsh)
 {
 	t_expantion_context	ctx;
 
@@ -85,7 +85,7 @@ char	*expand_variables(char *token)
 		return (NULL);
 	while (token[ctx.i])
 	{
-		handle_char(&ctx);
+		handle_char(&ctx, minsh);
 	}
 	ctx.result[ctx.result_idx] = '\0';
 	return (ctx.result);
