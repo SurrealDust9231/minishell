@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 18:14:24 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/05/22 19:58:19 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/22 20:56:28 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,12 @@ int	mbb_cmd_export(char **av, t_minsh *minsh)
 		len = _mbb_cmd_export_split(av[i]);
 		if (len != -1 \
 			&& ft_envlst_set(&minsh->elst, av[i], av[i] + len + 1) != 0)
+		{
+			minsh->status = 1;
 			return (ft_error_return(av[0], -1));
+		}
 		i++;
 	}
+	minsh->status = 0;
 	return (0);
 }
