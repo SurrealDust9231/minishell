@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 21:37:06 by saguayo-          #+#    #+#             */
-/*   Updated: 2024/05/22 20:01:29 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/23 11:52:01 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,19 @@
 # include <libftenvlst.h>
 # include <minishell_frontend.h>
 # include <minishell_backend.h>
+
+typedef struct s_msst t_msst;
+struct s_msst
+{
+	int				index;
+	char			*line;
+	char			*expanded;
+	t_astree		*ast;
+	t_minsh			*minsh;
+	t_split_state	state;
+};
+
+void		handle_cmd_signals(void);
+void		handle_global_signals(void);
 
 #endif

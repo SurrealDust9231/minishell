@@ -6,7 +6,7 @@
 #    By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/21 00:28:11 by chang-pa          #+#    #+#              #
-#    Updated: 2024/05/22 20:01:48 by chang-pa         ###   ########.fr        #
+#    Updated: 2024/05/23 11:48:00 by chang-pa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC=cc
 CFLAGS=-Wall -Wextra -Werror
 
 NAME=minishell
-OBJS=main.o
+OBJS=main.o signal/handle_cmd_signals.o signal/handle_global_signals.o
 
 BTIN_DIR=builtins
 
@@ -36,8 +36,7 @@ BE_DIR=backend
 BE_FLAGS=-lminback -L$(BE_DIR)
 BE_INC=-I$(BE_DIR)/includes
 
-# RL_FLAGS=-lreadline
-RL_FLAGS=-Lreadline -l ncurses readline/libhistory.a \
+RL_FLAGS=-Lreadline readline/libhistory.a \
 readline/libreadline.a
 
 NC_FLAGS=-lncurses

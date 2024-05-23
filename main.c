@@ -6,99 +6,69 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 14:04:06 by saguayo-          #+#    #+#             */
-/*   Updated: 2024/05/23 00:54:31 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/23 12:01:22 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	handle_cmd_signal(int sig)
+static int	_minishell_get_args(t_msst *msst)
 {
-	if (sig == SIGINT)
+	msst->line = readline("minishell&> ");
+	if (msst->line == NULL)
 	{
-		printf("\n");
-		rl_on_new_line();
-		rl_replace_line("", 0);
+		write(STDOUT_FILENO, "exit\n", 5);
+		return (-1);
 	}
+	add_history(msst->line);
+	msst->expanded = expand_variables(msst->line, msst->minsh);
+	custom_split(msst->expanded, &msst->state);
+	return (0);
 }
 
-static void	handle_global_signal(int sig)
+static int	_minishell_parsing_ast(t_msst *msst)
 {
-	if (sig == SIGINT)
+	msst->index = 0;
+	msst->ast = parse_commands(msst->state.result, &msst->index);
+	if (msst->ast)
 	{
-		printf("\n");
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
+		handle_cmd_signals();
+		mbe_execute_node(msst->ast, msst->minsh);
+		handle_global_signals();
+		ft_ast_destroy(&msst->ast);
 	}
+	return (0);
 }
 
-void	handle_cmd_signals(void)
+static int	_minishell_cleanup_cache(t_msst *msst)
 {
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, handle_cmd_signal);
+	free(msst->line);
+	free(msst->expanded);
+	cleanup_split_state(&msst->state);
+	return (1);
 }
 
-void	handle_global_signals(void)
+int	main(int ac, char **av, char **_envs)
 {
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, handle_global_signal);
-}
+	t_msst	msst;
 
-int	main(int _ac, char **_av, char **_envs)
-{
-	int				i;
-	int				index;
-	char			*line;
-	char			**av;
-	char			*expanded;
-	t_astree		*ast;
-	t_minsh			*minsh;
-	t_split_state	state;
-
-	(void) _ac;
-	(void) _av;
+	if (ac != 1 || av == NULL)
+		return (0);
 	handle_global_signals();
-	if (ft_minsh_init(&minsh, _envs) != 0)
+	if (ft_minsh_init(&msst.minsh, _envs) != 0)
 		exit (ft_error_return("env init error", -1));
 	while (1)
 	{
-		line = readline("minishell&> ");
-		if (line == NULL)
-		{
-			write(STDOUT_FILENO, "exit\n", 5);
+		if (_minishell_get_args(&msst) != 0)
 			break ;
-		}
-		add_history(line);
-		expanded = expand_variables(line, minsh);
-		custom_split(expanded, &state);
-		if (!state.result)
-		{
-			free(line);
-			free(expanded);
-			cleanup_split_state(&state);
+		if (!msst.state.result && _minishell_cleanup_cache(&msst))
 			continue ;
-		}
-		if (ft_strcmp(line, "exit") == 0)
-		{
-			free(line);
-			free(expanded);
-			cleanup_split_state(&state);
+		if (ft_strcmp(msst.line, "exit") == 0 && _minishell_cleanup_cache(&msst))
 			break ;
-		}
-		index = 0;
-		ast = parse_commands(state.result, &index);
-		if (ast)
-		{
-			handle_cmd_signals();
-			mbe_execute_node(ast, minsh);
-			handle_global_signals();
-			ft_ast_destroy(&ast);
-		}
-		cleanup_split_state(&state);
-		free(line);
-		free(expanded);
+		if (_minishell_parsing_ast(&msst) != 0)
+			break ;
+		_minishell_cleanup_cache(&msst);
 	}
-	ft_minsh_destroy(minsh);
+	ft_minsh_destroy(msst.minsh);
 	return (0);
 }
