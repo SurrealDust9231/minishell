@@ -3,29 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
+/*   By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 18:46:16 by saguayo-          #+#    #+#             */
-/*   Updated: 2024/05/22 20:08:00 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/22 21:40:13 by saguayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell_frontend.h"
 
-int	quote_state(int current_state, int in_other_quote)
-{
-	if (!in_other_quote)
-		return (!current_state);
-	return (current_state);
-}
-
-void	copy_var_value(char *result, int *result_idx, const char *var_value)
-{
-	while (*var_value)
-		result[(*result_idx)++] = *var_value++;
-}
-
-int	variable_expansion(const char *token, int *i, char *result, int *result_idx, t_minsh *minsh)
+int	variable_expansion(const char *token, int *i,
+	t_result_context *res_ctx, t_minsh *minsh)
 {
 	char	var_name[256];
 	int		var_idx;
@@ -38,37 +26,45 @@ int	variable_expansion(const char *token, int *i, char *result, int *result_idx,
 	var_name[var_idx] = '\0';
 	var_value = ft_envlst_get(minsh->elst, var_name);
 	if (var_value)
-		copy_var_value(result, result_idx, var_value);
-	if (token[*i] != '\0')
-		(*i)--;
+		copy_var_value(res_ctx->result, res_ctx->result_idx, var_value);
 	return (*i);
 }
 
-void	handle_char(t_expantion_context *ctx, t_minsh *minsh)
+void	p_q(t_expantion_context *ctx, t_minsh *minsh, t_result_context *res_ctx)
 {
-	if (ctx->token[ctx->i] == '\'' && !ctx->in_double_quote)
+	int	prev_i;
+
+	if (ctx->token[ctx->i] == '\'')
 	{
 		ctx->in_single_quote = quote_state(ctx->in_single_quote,
 				ctx->in_double_quote);
-		ctx->i++;
+		ctx->result[ctx->result_idx++] = ctx->token[ctx->i++];
 	}
-	else if (ctx->token[ctx->i] == '\"' && !ctx->in_single_quote)
+	else if (ctx->token[ctx->i] == '\"')
 	{
 		ctx->in_double_quote = quote_state(ctx->in_double_quote,
 				ctx->in_single_quote);
-		ctx->i++;
+		ctx->result[ctx->result_idx++] = ctx->token[ctx->i++];
 	}
 	else if (ctx->token[ctx->i] == '$' && !ctx->in_single_quote
 		&& (ctx->in_double_quote || !ft_isspace(ctx->token[ctx->i + 1])))
 	{
-		ctx->i = variable_expansion(ctx->token, &ctx->i,
-				ctx->result, &ctx->result_idx, minsh);
+		prev_i = ctx->i;
+		ctx->i = variable_expansion(ctx->token, &ctx->i, res_ctx, minsh);
+		if (ctx->i == prev_i)
+			ctx->i++;
 	}
 	else
-	{
-		ctx->result[ctx->result_idx++] = ctx->token[ctx->i];
-		ctx->i++;
-	}
+		ctx->result[ctx->result_idx++] = ctx->token[ctx->i++];
+}
+
+void	handle_char(t_expantion_context *ctx, t_minsh *minsh)
+{
+	t_result_context	res_ctx;
+
+	res_ctx.result = ctx->result;
+	res_ctx.result_idx = &ctx->result_idx;
+	p_q(ctx, minsh, &res_ctx);
 }
 
 char	*expand_variables(char *token, t_minsh *minsh)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_frontend.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
+/*   By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 17:48:27 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/05/22 20:07:12 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/22 21:41:41 by saguayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,12 @@ typedef struct s_expantion_context
 	char	*token;
 }	t_expantion_context;
 
+typedef struct s_result_context
+{
+	char	*result;
+	int		*result_idx;
+}			t_result_context;
+
 char		**custom_split(char *str);
 char		*expand_variables(char *token, t_minsh *minsh);
 t_astree	*parse_commands(char **tokens, int *index);
@@ -52,6 +58,9 @@ t_astree	*parse_commands(char **tokens, int *index);
 void		init_split_state(t_split_state *state);
 void		add_token_if_needed(t_split_state *state);
 void		cleanup_split_state(t_split_state *state);
+int			quote_state(int current_state, int in_other_quote);
+void		copy_var_value(char *result,
+				int *result_idx, const char *var_value);
 
 t_astree	*create_red_node(char **tokens,
 				int *index, t_astree *left, int type);

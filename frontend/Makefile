@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+         #
+#    By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/13 21:32:26 by chang-pa          #+#    #+#              #
-#    Updated: 2024/05/22 20:07:00 by chang-pa         ###   ########.fr        #
+#    Updated: 2024/05/22 21:41:09 by saguayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ INC=includes
 _POBJS=parse_commands.o parse_utils.o
 POBJS=$(_POBJS:%=parsing/%)
 
-_LOBJS=split.o split_utils.o expand.o
+_LOBJS=split.o split_utils.o expand.o expand_utils.o
 LOBJS=$(_LOBJS:%=lexer/%)
 
 _LIBS_INC=libft libftast libftend libftenvlst

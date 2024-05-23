@@ -31,7 +31,7 @@ PACKAGE_TARNAME = readline
 srcdir = .
 
 top_srcdir = .
-BUILD_DIR = /Users/chang-pa/minishell/readline
+BUILD_DIR = /Users/saguayo-/Desktop/minishell_github/readline
 
 INSTALL = /usr/bin/install -c
 INSTALL_PROGRAM = ${INSTALL}
@@ -76,7 +76,7 @@ CTAGS = ctags -w
 
 CFLAGS = -g -O2 -Wno-parentheses -Wno-format-security -Wno-tautological-constant-out-of-range-compare
 LOCAL_CFLAGS =  -DRL_LIBRARY_VERSION='"$(RL_LIBRARY_VERSION)"' -DBRACKETED_PASTE_DEFAULT=1
-CPPFLAGS = 
+CPPFLAGS = -I/Users/saguayo-/.brew/opt/readline/include
 
 DEFS = -DHAVE_CONFIG_H 
 LOCAL_DEFS = 

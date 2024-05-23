@@ -32,7 +32,7 @@ datarootdir = ${prefix}/share
 srcdir = .
 VPATH = ..
 topdir = ..
-BUILD_DIR = /Users/chang-pa/minishell/readline
+BUILD_DIR = /Users/saguayo-/Desktop/minishell_github/readline
 
 INSTALL = /usr/bin/install -c
 INSTALL_PROGRAM = ${INSTALL}
@@ -65,8 +65,8 @@ DESTDIR =
 
 CFLAGS = -g -O2 -Wno-parentheses -Wno-format-security -Wno-tautological-constant-out-of-range-compare
 LOCAL_CFLAGS =  -DRL_LIBRARY_VERSION='"$(RL_LIBRARY_VERSION)"' -DBRACKETED_PASTE_DEFAULT=1
-CPPFLAGS = 
-LDFLAGS =   -g -O2 -Wno-parentheses -Wno-format-security -Wno-tautological-constant-out-of-range-compare
+CPPFLAGS = -I/Users/saguayo-/.brew/opt/readline/include
+LDFLAGS = -L/Users/saguayo-/.brew/opt/readline/lib  -g -O2 -Wno-parentheses -Wno-format-security -Wno-tautological-constant-out-of-range-compare
 
 DEFS = -DHAVE_CONFIG_H 
 LOCAL_DEFS = 
@@ -85,7 +85,7 @@ SHOBJ_LDFLAGS = -dynamiclib -dynamic -undefined dynamic_lookup
 SHOBJ_XLDFLAGS = 
 SHOBJ_LIBS = 
 
-SHLIB_XLDFLAGS =  -dynamiclib -install_name $(libdir)/`echo $@ | sed "s:\..*::"`.$(SHLIB_MAJOR).$(SHLIB_LIBSUFF) -current_version $(SHLIB_MAJOR)$(SHLIB_MINOR) -compatibility_version $(SHLIB_MAJOR)$(SHLIB_MINOR) -v
+SHLIB_XLDFLAGS = -L/Users/saguayo-/.brew/opt/readline/lib -dynamiclib -install_name $(libdir)/`echo $@ | sed "s:\..*::"`.$(SHLIB_MAJOR).$(SHLIB_LIBSUFF) -current_version $(SHLIB_MAJOR)$(SHLIB_MINOR) -compatibility_version $(SHLIB_MAJOR)$(SHLIB_MINOR) -v
 SHLIB_LIBS = -lncurses
 
 SHLIB_DOT = .
