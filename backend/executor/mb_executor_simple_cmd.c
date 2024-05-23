@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 17:48:20 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/05/22 20:37:27 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/22 20:48:23 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	mbe_simple_cmd(t_astree *node, char **av, t_minsh *minsh)
 {
 	char	*path;
 
-	if (!av)
+	if (!av || !av[0])
 		return (0);
 	path = NULL;
 	if (ft_strchr(av[0], '/'))

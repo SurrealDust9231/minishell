@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 12:29:14 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/05/22 20:33:26 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/22 20:43:40 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@
 
 int		ft_error_return(const char *msg, int rt);
 int		ft_puterr_return(const char *msg, int rt);
-void	ft_error_cnf(const char *msg);
+void	ft_error_cnf(const char *arg);
 
 #endif
