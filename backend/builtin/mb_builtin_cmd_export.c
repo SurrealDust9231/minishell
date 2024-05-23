@@ -6,11 +6,21 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 18:14:24 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/05/23 14:45:28 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/23 14:58:09 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_backend.h"
+
+static int	_mbb_cmd_export_count(char **av)
+{
+	int	i;
+
+	i = 0;
+	while (av[i] != NULL)
+		i++;
+	return (i);
+}
 
 static int	_mbb_cmd_export_split(char *env)
 {
@@ -55,6 +65,11 @@ int	mbb_cmd_export(char **av, t_minsh *minsh)
 
 	i = 0;
 	minsh->status = 0;
+	if (_mbb_cmd_export_count(av) == 1)
+	{
+		ft_envlst_showall_ascii(minsh->elst);
+		return (0);
+	}
 	while (av[i])
 	{
 		len = _mbb_cmd_export_split(av[i]);

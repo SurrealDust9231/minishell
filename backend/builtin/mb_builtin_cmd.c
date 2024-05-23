@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 22:37:33 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/05/22 20:57:07 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/23 14:50:00 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	mbb_cmd(char **av, char *path, t_minsh *minsh)
 	if (ft_strcmp(path, "cd") == 0)
 		return (mbb_cmd_cd(av, minsh));
 	else if (ft_strcmp(path, "exit") == 0)
-		return (mbb_cmd_exit(av));
+		return (mbb_cmd_exit(av, minsh));
 	else if (ft_strcmp(path, "export") == 0)
 		return (mbb_cmd_export(av, minsh));
 	else if (ft_strcmp(path, "unset") == 0)
