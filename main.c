@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
+/*   By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 14:04:06 by saguayo-          #+#    #+#             */
-/*   Updated: 2024/05/22 20:04:42 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/22 20:20:25 by saguayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	main(int _ac, char **_av, char **_envs)
 
 	(void) _ac;
 	(void) _av;
+	handle_global_signals();
 	minsh.elst = NULL;
 	if (ft_envlst_init(&minsh.elst, _envs) != 0)
 		exit (ft_error_return("env init error", -1));
