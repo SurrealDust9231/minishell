@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 17:48:20 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/05/15 10:34:21 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/22 18:11:43 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	_mbes_cmd_return(char **path, int r)
 	return (r);
 }
 
-int	mbe_simple_cmd(t_astree *node)
+int	mbe_simple_cmd(t_astree *node, t_minsh *minsh)
 {
 	char	*path;
 	char	**av;
@@ -35,10 +35,10 @@ int	mbe_simple_cmd(t_astree *node)
 		return (ft_error_return("_mbes_cmd1", -1));
 	else if (path)
 	{
-		if (mbb_cmd(node->data, path) != 0)
+		if (mbb_cmd(node->data, path, minsh) != 0)
 			return (_mbes_cmd_return(&path, -1));
 	}
-	else if (mbn_search(&path, av[0]) != 0)
+	else if (mbn_search(&path, av[0], minsh) != 0)
 		return (ft_error_return("_mbes_cmd2", -1));
 	else if (path)
 	{

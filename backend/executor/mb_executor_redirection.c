@@ -6,13 +6,13 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 18:55:54 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/04/30 17:46:29 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/22 19:34:55 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_backend.h"
 
-int	mbe_redirect_out(t_astree *node)
+int	mbe_redirect_out(t_astree *node, t_minsh *minsh)
 {
 	int	original_stdout;
 	int	fd;
@@ -24,13 +24,13 @@ int	mbe_redirect_out(t_astree *node)
 		return (ft_error_return("mbe_redirect_out", -1));
 	dup2(fd, STDOUT_FILENO);
 	close(fd);
-	mbe_execute_node(node->l);
+	mbe_execute_node(node->l, minsh);
 	dup2(original_stdout, STDOUT_FILENO);
 	close(original_stdout);
 	return (0);
 }
 
-int	mbe_redirect_append(t_astree *node)
+int	mbe_redirect_append(t_astree *node, t_minsh *minsh)
 {
 	int	original_stdout;
 	int	fd;
@@ -42,13 +42,13 @@ int	mbe_redirect_append(t_astree *node)
 		return (ft_error_return("mbe_redirect_append", -1));
 	dup2(fd, STDOUT_FILENO);
 	close(fd);
-	mbe_execute_node(node->l);
+	mbe_execute_node(node->l, minsh);
 	dup2(original_stdout, STDOUT_FILENO);
 	close(original_stdout);
 	return (0);
 }
 
-int	mbe_redirect_in(t_astree *node)
+int	mbe_redirect_in(t_astree *node, t_minsh *minsh)
 {
 	int	original_stdin;
 	int	fd;
@@ -59,13 +59,13 @@ int	mbe_redirect_in(t_astree *node)
 		return (ft_error_return("mbe_redirect_in", -1));
 	dup2(fd, STDIN_FILENO);
 	close(fd);
-	mbe_execute_node(node->l);
+	mbe_execute_node(node->l, minsh);
 	dup2(original_stdin, STDIN_FILENO);
 	close(original_stdin);
 	return (0);
 }
 
-int	mbe_redirect_heredoc(t_astree *node)
+int	mbe_redirect_heredoc(t_astree *node, t_minsh *minsh)
 {
 	int		fds[2];
 	char	**args;
@@ -88,6 +88,6 @@ int	mbe_redirect_heredoc(t_astree *node)
 	dup2(fds[0], STDIN_FILENO);
 	wait(NULL);
 	close(fds[0]);
-	mbe_execute_node(node->l);
+	mbe_execute_node(node->l, minsh);
 	return (0);
 }

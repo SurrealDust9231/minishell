@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 10:24:27 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/05/15 10:31:51 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/22 19:41:39 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	mbb_cmd_exit(char **av)
 {
-	(void) av;
+	if (!av)
+		return (-1);
 	exit(0);
 	return (0);
 }

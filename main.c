@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 14:04:06 by saguayo-          #+#    #+#             */
-/*   Updated: 2024/05/22 19:25:27 by saguayo-         ###   ########.fr       */
+/*   Updated: 2024/05/22 20:01:35 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	main(int _ac, char **_av, char **_envs)
 
 	(void) _ac;
 	(void) _av;
-	handle_global_signals();
+	minsh.elst = NULL;
 	if (ft_envlst_init(&minsh.elst, _envs) != 0)
 		exit (ft_error_return("env init error", -1));
 	while (1)
@@ -94,7 +94,7 @@ int	main(int _ac, char **_av, char **_envs)
 		if (ast)
 		{
 			handle_cmd_signals();
-			mbe_execute_node(ast);
+			mbe_execute_node(ast, &minsh);
 			handle_global_signals();
 			ft_ast_destroy(&ast);
 		}

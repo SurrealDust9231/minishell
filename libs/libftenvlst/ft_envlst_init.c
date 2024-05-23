@@ -6,13 +6,13 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 11:54:42 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/05/22 12:11:47 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/22 19:44:13 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftenvlst.h"
 
-int	_ft_envlst_init_putenv(t_envlst **elst, char *env)
+static int	_ft_envlst_init_putenv(t_envlst **elst, char *env)
 {
 	int			i;
 	t_envlst	*node;

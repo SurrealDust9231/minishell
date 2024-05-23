@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cd.h                                            :+:      :+:    :+:   */
+/*   mb_builtin_cmd_env.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/30 20:22:15 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/04/30 20:33:56 by chang-pa         ###   ########.fr       */
+/*   Created: 2024/05/22 18:14:24 by chang-pa          #+#    #+#             */
+/*   Updated: 2024/05/22 19:45:57 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_EXPORT_H
-# define FT_EXPORT_H
+#include "minishell_backend.h"
 
-# include <libft.h>
-# include <libftast.h>
-# include <libftend.h>
-
-#endif
+int	mbb_cmd_env(char **av, t_minsh *minsh)
+{
+	if (!av)
+		return (-1);
+	ft_envlst_showall(minsh->elst);
+	return (0);
+}

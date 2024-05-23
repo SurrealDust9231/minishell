@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 22:37:33 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/05/15 10:32:29 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/22 19:47:07 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,20 @@ static int	_mbe_builtin_cmd_execv(char **av, char *path)
 	return (0);
 }
 
-int	mbb_cmd(char **av, char *path)
+int	mbb_cmd(char **av, char *path, t_minsh *minsh)
 {
 	if (!av)
 		return (0);
 	if (ft_strcmp(path, "cd") == 0)
-		return (mbb_cmd_cd(av));
+		return (mbb_cmd_cd(av, minsh));
 	else if (ft_strcmp(path, "exit") == 0)
 		return (mbb_cmd_exit(av));
+	else if (ft_strcmp(path, "export") == 0)
+		return (mbb_cmd_export(av, minsh));
+	else if (ft_strcmp(path, "unset") == 0)
+		return (mbb_cmd_unset(av, minsh));
+	else if (ft_strcmp(path, "env") == 0)
+		return (mbb_cmd_env(av, minsh));
 	else
 		return (_mbe_builtin_cmd_execv(av, path));
 }

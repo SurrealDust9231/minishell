@@ -6,7 +6,7 @@
 #    By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/13 21:32:26 by chang-pa          #+#    #+#              #
-#    Updated: 2024/05/15 10:25:34 by chang-pa         ###   ########.fr        #
+#    Updated: 2024/05/22 19:40:14 by chang-pa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,14 +23,14 @@ _EOBJS=mb_executor_simple_cmd.o \
 	mb_executor_pipe.o mb_executor_execute_node.o mb_executor_redirection.o
 EOBJS=$(_EOBJS:%=executor/%)
 
-_BOBJS=mb_builtin_search.o mb_builtin_cmd.o mb_builtin_cmd_cd.o \
-	mb_builtin_cmd_exit.o
+_BOBJS=mb_builtin_search.o mb_builtin_cmd.o mb_builtin_cmd_cd.o mb_builtin_cmd_env.o mb_builtin_cmd_unset.o \
+	mb_builtin_cmd_exit.o mb_builtin_cmd_export.o
 BOBJS=$(_BOBJS:%=builtin/%)
 
 _NOBJS=mb_nbuiltin_search.o mb_nbuiltin_cmd.o
 NOBJS=$(_NOBJS:%=nbuiltin/%)
 
-_LIBS_INC=libft libftast libftend
+_LIBS_INC=libft libftast libftend libftenvlst
 LIBS_INC=$(_LIBS_INC:%=-I../libs/%)
 
 all: $(NAME)
