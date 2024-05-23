@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 14:04:06 by saguayo-          #+#    #+#             */
-/*   Updated: 2024/05/22 20:20:25 by saguayo-         ###   ########.fr       */
+/*   Updated: 2024/05/22 21:22:58 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,12 @@ int	main(int _ac, char **_av, char **_envs)
 	char		**av;
 	char		*expanded;
 	t_astree	*ast;
-	t_minsh		minsh;
+	t_minsh		*minsh;
 
 	(void) _ac;
 	(void) _av;
 	handle_global_signals();
-	minsh.elst = NULL;
-	if (ft_envlst_init(&minsh.elst, _envs) != 0)
+	if (ft_minsh_init(&minsh, _envs) != 0)
 		exit (ft_error_return("env init error", -1));
 	while (1)
 	{
@@ -85,7 +84,7 @@ int	main(int _ac, char **_av, char **_envs)
 		i = 0;
 		while (av[i] != NULL)
 		{
-			expanded = expand_variables(av[i], &minsh);
+			expanded = expand_variables(av[i], minsh);
 			free(av[i]);
 			av[i] = expanded;
 			i++;
@@ -95,12 +94,13 @@ int	main(int _ac, char **_av, char **_envs)
 		if (ast)
 		{
 			handle_cmd_signals();
-			mbe_execute_node(ast, &minsh);
+			mbe_execute_node(ast, minsh);
 			handle_global_signals();
 			ft_ast_destroy(&ast);
 		}
 		free(av);
 		free(line);
 	}
+	ft_minsh_destroy(minsh);
 	return (0);
 }
