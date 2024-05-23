@@ -6,7 +6,7 @@
 /*   By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 19:01:01 by saguayo-          #+#    #+#             */
-/*   Updated: 2024/05/23 14:28:44 by saguayo-         ###   ########.fr       */
+/*   Updated: 2024/05/23 19:01:02 by saguayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_astree	*create_red_node(char **tokens,
 	args = malloc(2 * sizeof(char *));
 	if (!args)
 		return (NULL);
-	args[0] = tokens[*index];
+	args[0] = strdup(tokens[*index]);
 	args[1] = NULL;
 	if (ft_ast_create(&right) != 0)
 		return (NULL);
