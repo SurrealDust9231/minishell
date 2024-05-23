@@ -1,35 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mb_builtin_cmd_cd.c                                :+:      :+:    :+:   */
+/*   ft_envlst_get_node.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/15 09:47:26 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/05/22 19:41:26 by chang-pa         ###   ########.fr       */
+/*   Created: 2024/05/21 19:43:38 by chang-pa          #+#    #+#             */
+/*   Updated: 2024/05/22 19:29:52 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_backend.h"
+#include "libftenvlst.h"
 
-static int	_mbbcc_av_count(char **av)
+static int	_ft_envlst_get_strcmp(char *s1, char *s2)
 {
 	int	i;
 
 	i = 0;
-	while (av[i] != NULL)
+	if (s1 == NULL || s2 == NULL)
+		return (-1);
+	while (s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0')
 		i++;
-	return (i);
+	return (s1[i] - s2[i]);
 }
 
-int	mbb_cmd_cd(char **av, t_minsh *minsh)
+t_envlst	*ft_envlst_get_node(t_envlst *elst, char *key)
 {
-	if (!av || !minsh)
-		return (0);
-	if (_mbbcc_av_count(av) != 2)
-		return (ft_puterr_return(\
-				"cd: wrong number of arguments\n", -1));
-	if (chdir(av[1]) != 0)
-		return (ft_error_return(av[0], -1));
-	return (0);
+	if (elst == NULL || key == NULL)
+		return (NULL);
+	if (_ft_envlst_get_strcmp(elst->key, key) == 0)
+		return (elst);
+	else
+		return (ft_envlst_get_node(elst->next, key));
 }

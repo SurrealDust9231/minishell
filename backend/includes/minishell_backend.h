@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 17:48:27 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/05/21 19:53:36 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/22 19:35:11 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,24 +24,35 @@
 # include <libft.h>
 # include <libftast.h>
 # include <libftend.h>
+# include <libftenvlst.h>
 
 # ifndef MINISHELL_ROOT_DIR
 #  define MINISHELL_ROOT_DIR 0
 # endif
 
-int		mbe_execute_node(t_astree *node);
-int		mbe_simple_cmd(t_astree *node);
-int		mbe_pipe(t_astree *node);
-int		mbe_redirect_out(t_astree *node);
-int		mbe_redirect_append(t_astree *node);
-int		mbe_redirect_in(t_astree *node);
-int		mbe_redirect_heredoc(t_astree *node);
+typedef struct s_minsh	t_minsh;
+struct	s_minsh
+{
+	t_envlst	*elst;
+};
 
-int		mbn_search(char **path, char *file_path);
+int		mbe_execute_node(t_astree *node, t_minsh *minsh);
+int		mbe_simple_cmd(t_astree *node, t_minsh *minsh);
+int		mbe_pipe(t_astree *node, t_minsh *minsh);
+int		mbe_redirect_out(t_astree *node, t_minsh *minsh);
+int		mbe_redirect_append(t_astree *node, t_minsh *minsh);
+int		mbe_redirect_in(t_astree *node, t_minsh *minsh);
+int		mbe_redirect_heredoc(t_astree *node, t_minsh *minsh);
+
+int		mbn_search(char **path, char *file_path, t_minsh *minsh);
 int		mbn_cmd(char **av, char *path);
+
 int		mbb_search(char **path, char *file_path, char *builtin_path);
-int		mbb_cmd_cd(char **av);
+int		mbb_cmd_cd(char **av, t_minsh *minsh);
+int		mbb_cmd_export(char **av, t_minsh *minsh);
+int		mbb_cmd_env(char **av, t_minsh *minsh);
+int		mbb_cmd_unset(char **av, t_minsh *minsh);
 int		mbb_cmd_exit(char **av);
-int		mbb_cmd(char **av, char *path);
+int		mbb_cmd(char **av, char *path, t_minsh *minsh);
 
 #endif

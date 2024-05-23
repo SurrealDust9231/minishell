@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 22:30:11 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/05/15 10:27:31 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/22 19:59:14 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,24 +31,33 @@ static char	*_mbbs_get_subcmd(char *file_path, char *builtin_path)
 	return (path);
 }
 
-static char	*_mbbs_selector(char *file_path)
+static int	_mbbs_selector_path(char **path, \
+	char *file_path, char *str, size_t len)
 {
-	char	*path;
+	if (ft_strcmp(file_path, str) != 0)
+		return (0);
+	*path = (char *) malloc(sizeof(char) * (len + 1));
+	if (*path == NULL)
+		return (-1);
+	(*path)[len] = '\0';
+	ft_strncpy(*path, str, len);
+	return (0);
+}
 
-	path = NULL;
-	if (ft_strcmp(file_path, "cd") == 0)
-	{
-		path = (char *) malloc(sizeof(char) * 3);
-		path[2] = '\0';
-		ft_strncpy(path, "cd", 2);
-	}
-	else if (ft_strcmp(file_path, "exit") == 0)
-	{
-		path = (char *) malloc(sizeof(char) * 5);
-		path[4] = '\0';
-		ft_strncpy(path, "exit", 4);
-	}
-	return (path);
+static int	_mbbs_selector(char **path, char *file_path)
+{
+	*path = NULL;
+	if (_mbbs_selector_path(path, file_path, "cd", 2) != 0)
+		return (-1);
+	if (_mbbs_selector_path(path, file_path, "exit", 4) != 0)
+		return (-1);
+	if (_mbbs_selector_path(path, file_path, "env", 3) != 0)
+		return (-1);
+	if (_mbbs_selector_path(path, file_path, "export", 6) != 0)
+		return (-1);
+	if (_mbbs_selector_path(path, file_path, "unset", 5) != 0)
+		return (-1);
+	return (0);
 }
 
 int	mbb_search(char **path, char *file_path, char *builtin_path)
@@ -57,12 +66,13 @@ int	mbb_search(char **path, char *file_path, char *builtin_path)
 
 	if (file_path == NULL || builtin_path == NULL)
 		return (0);
-	*path = _mbbs_selector(file_path);
+	if (_mbbs_selector(path, file_path) != 0)
+		return (ft_error_return("mbeb_search1", -1));
 	if (*path != NULL)
 		return (0);
 	*path = _mbbs_get_subcmd(file_path, builtin_path);
 	if (*path == NULL)
-		return (ft_error_return("mbeb_search1", -1));
+		return (ft_error_return("mbeb_search2", -1));
 	if (stat(*path, &st) == 0 && S_ISREG(st.st_mode))
 		return (0);
 	free(*path);

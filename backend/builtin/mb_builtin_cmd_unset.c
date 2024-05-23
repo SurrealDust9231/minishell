@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env.c                                           :+:      :+:    :+:   */
+/*   mb_builtin_cmd_unset.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/30 20:30:07 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/04/30 20:30:29 by chang-pa         ###   ########.fr       */
+/*   Created: 2024/05/22 18:14:24 by chang-pa          #+#    #+#             */
+/*   Updated: 2024/05/22 19:23:04 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_env.h"
+#include "minishell_backend.h"
 
-int	main(int ac, char **av)
+int	mbb_cmd_unset(char **av, t_minsh *minsh)
 {
-	(void) ac;
-	(void) av;
+	int	i;
+
+	i = 1;
+	while (av[i])
+		ft_envlst_delone(&minsh->elst, av[i++]);
 	return (0);
 }

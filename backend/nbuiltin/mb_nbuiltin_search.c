@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 17:53:01 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/05/13 18:13:51 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/22 18:10:44 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ static char	*_mbens_get_subcmd(size_t i[2], char *file_path, char *env_path)
 	return (path);
 }
 
-int	mbn_search(char **path, char *file_path)
+int	mbn_search(char **path, char *file_path, t_minsh *minsh)
 {
 	char		*env_path;
 	size_t		i[2];
 	struct stat	st;
 
-	env_path = getenv("PATH");
+	env_path = ft_envlst_get(minsh->elst, "PATH");
 	if (file_path == NULL || env_path == NULL)
 		return (0);
 	i[0] = 0;

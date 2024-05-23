@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 14:04:06 by saguayo-          #+#    #+#             */
-/*   Updated: 2024/05/22 12:25:20 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/22 19:43:35 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	main(int _ac, char **_av, char **_envs)
 
 	(void) _ac;
 	(void) _av;
+	minsh.elst = NULL;
 	if (ft_envlst_init(&minsh.elst, _envs) != 0)
 		exit (ft_error_return("env init error", -1));
 	while (1)
@@ -65,7 +66,7 @@ int	main(int _ac, char **_av, char **_envs)
 		ast = parse_commands(av, &index);
 		if (ast)
 		{
-			mbe_execute_node(ast);
+			mbe_execute_node(ast, &minsh);
 			ft_ast_destroy(&ast);
 		}
 		free(av);
