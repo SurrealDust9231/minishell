@@ -6,7 +6,7 @@
 /*   By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 18:46:16 by saguayo-          #+#    #+#             */
-/*   Updated: 2024/05/22 21:40:13 by saguayo-         ###   ########.fr       */
+/*   Updated: 2024/05/23 13:33:15 by saguayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@ int	variable_expansion(const char *token, int *i,
 
 	var_idx = 0;
 	(*i)++;
+	if (token[*i] == '?')
+	{
+		printf("%d\n", minsh->status);
+		(*i)++;
+		return (*i);
+	}
 	while (ft_isalnum(token[*i]) || token[*i] == '_')
 		var_name[var_idx++] = token[(*i)++];
 	var_name[var_idx] = '\0';
