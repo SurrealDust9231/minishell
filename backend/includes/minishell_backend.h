@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 17:48:27 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/05/22 20:07:32 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/22 20:37:49 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # endif
 
 int		mbe_execute_node(t_astree *node, t_minsh *minsh);
-int		mbe_simple_cmd(t_astree *node, t_minsh *minsh);
+int		mbe_simple_cmd(t_astree *node, char **av, t_minsh *minsh);
 int		mbe_pipe(t_astree *node, t_minsh *minsh);
 int		mbe_redirect_out(t_astree *node, t_minsh *minsh);
 int		mbe_redirect_append(t_astree *node, t_minsh *minsh);
