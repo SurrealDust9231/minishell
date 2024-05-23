@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_commands.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
+/*   By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 14:56:40 by saguayo-          #+#    #+#             */
-/*   Updated: 2024/05/23 00:53:47 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/23 14:19:47 by saguayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ t_astree	*parse_command_args(char **tokens, int *index, t_astree **left)
 		&& ft_strcmp(tokens[*index + arg_count], "<<") != 0)
 		arg_count++;
 	cmd_args = malloc((arg_count + 1) * sizeof(char *));
+	if (cmd_args == NULL)
+		return (NULL);
 	i = -1;
 	while (++i < arg_count)
 		cmd_args[i] = ft_strdup(tokens[*index + i]);

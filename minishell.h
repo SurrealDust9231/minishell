@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
+/*   By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 21:37:06 by saguayo-          #+#    #+#             */
-/*   Updated: 2024/05/23 11:52:01 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/23 13:27:56 by saguayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@
 # include <minishell_frontend.h>
 # include <minishell_backend.h>
 
-typedef struct s_msst t_msst;
+typedef struct s_msst	t_msst;
+
 struct s_msst
 {
 	int				index;

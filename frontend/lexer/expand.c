@@ -6,7 +6,7 @@
 /*   By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 18:46:16 by saguayo-          #+#    #+#             */
-/*   Updated: 2024/05/23 13:33:15 by saguayo-         ###   ########.fr       */
+/*   Updated: 2024/05/23 13:53:01 by saguayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,7 @@ char	*expand_variables(char *token, t_minsh *minsh)
 	if (!ctx.result)
 		return (NULL);
 	while (token[ctx.i])
-	{
 		handle_char(&ctx, minsh);
-	}
 	ctx.result[ctx.result_idx] = '\0';
 	return (ctx.result);
 }

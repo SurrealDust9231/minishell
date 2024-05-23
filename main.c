@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
+/*   By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 14:04:06 by saguayo-          #+#    #+#             */
-/*   Updated: 2024/05/23 12:01:22 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/23 14:32:38 by saguayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ static int	_minishell_get_args(t_msst *msst)
 	}
 	add_history(msst->line);
 	msst->expanded = expand_variables(msst->line, msst->minsh);
+	if (msst->expanded == NULL)
+		return (-1);
 	custom_split(msst->expanded, &msst->state);
 	return (0);
 }
@@ -42,8 +44,10 @@ static int	_minishell_parsing_ast(t_msst *msst)
 
 static int	_minishell_cleanup_cache(t_msst *msst)
 {
-	free(msst->line);
-	free(msst->expanded);
+	if (msst->line != NULL)
+		free(msst->line);
+	if (msst->expanded != NULL)
+		free(msst->expanded);
 	cleanup_split_state(&msst->state);
 	return (1);
 }
@@ -63,12 +67,13 @@ int	main(int ac, char **av, char **_envs)
 			break ;
 		if (!msst.state.result && _minishell_cleanup_cache(&msst))
 			continue ;
-		if (ft_strcmp(msst.line, "exit") == 0 && _minishell_cleanup_cache(&msst))
+		if (ft_strcmp(msst.line, "exit") == 0)
 			break ;
 		if (_minishell_parsing_ast(&msst) != 0)
 			break ;
 		_minishell_cleanup_cache(&msst);
 	}
+	// _minishell_cleanup_cache(&msst);
 	ft_minsh_destroy(msst.minsh);
 	return (0);
 }
