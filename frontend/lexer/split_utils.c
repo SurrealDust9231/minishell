@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 18:38:22 by saguayo-          #+#    #+#             */
-/*   Updated: 2024/05/01 18:39:22 by saguayo-         ###   ########.fr       */
+/*   Updated: 2024/05/23 00:54:05 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 void	init_split_state(t_split_state *state)
 {
-	state->result = (char **)malloc(128 * sizeof(char *));
-	state->token = malloc(1024);
+	state->result = (char **) state->result_buf;
+	ft_bzero(state->result, 1024);
+	ft_bzero(state->token, 1024);
 	state->in_single_quote = 0;
 	state->in_double_quote = 0;
 	state->token_index = 0;
@@ -27,16 +28,14 @@ void	cleanup_split_state(t_split_state *state)
 {
 	int	j;
 
-	if (state->in_single_quote || state->in_double_quote)
+	j = 0;
+	while (j < 128)
 	{
-		printf("Syntax error: unmatched quote\n");
-		j = 0;
-		while (j < state->result_index)
-			free(state->result[j++]);
-		free(state->result);
-		state->result = NULL;
+		if (state->result[j] != NULL)
+			free(state->result[j]);
+		state->result[j] = NULL;
+		j++;
 	}
-	free(state->token);
 }
 
 void	add_token_if_needed(t_split_state *state)

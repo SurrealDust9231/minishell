@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_frontend.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 17:48:27 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/05/22 21:41:41 by saguayo-         ###   ########.fr       */
+/*   Updated: 2024/05/23 00:20:55 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@
 typedef struct s_split_state
 {
 	char	**result;
-	char	*token;
+	char	result_buf[1024];
+	char	token[1024];
 	int		in_single_quote;
 	int		in_double_quote;
 	int		token_index;
@@ -51,7 +52,7 @@ typedef struct s_result_context
 	int		*result_idx;
 }			t_result_context;
 
-char		**custom_split(char *str);
+int			custom_split(char *str, t_split_state *state);
 char		*expand_variables(char *token, t_minsh *minsh);
 t_astree	*parse_commands(char **tokens, int *index);
 

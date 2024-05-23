@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 18:42:30 by saguayo-          #+#    #+#             */
-/*   Updated: 2024/05/01 18:38:49 by saguayo-         ###   ########.fr       */
+/*   Updated: 2024/05/23 00:54:10 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,20 +56,14 @@ static void	handle_character(t_split_state *state, char *str)
 		state->token[state->token_index++] = current;
 }
 
-char	**custom_split(char *str)
+int	custom_split(char *str, t_split_state *state)
 {
-	t_split_state	state;
-
-	init_split_state(&state);
-	if (!state.result || !state.token)
-		return (NULL);
-	while (str[state.i])
+	init_split_state(state);
+	while (str[state->i])
 	{
-		handle_character(&state, str);
-		state.i++;
+		handle_character(state, str);
+		state->i++;
 	}
-	add_token_if_needed(&state);
-	state.result[state.result_index] = NULL;
-	cleanup_split_state(&state);
-	return (state.result);
+	add_token_if_needed(state);
+	return (0);
 }
