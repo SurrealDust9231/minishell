@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
+/*   By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 18:46:16 by saguayo-          #+#    #+#             */
-/*   Updated: 2024/05/23 14:48:41 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/23 20:31:33 by saguayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,24 @@
 int	variable_expansion(const char *token, int *i,
 	t_result_context *res_ctx, t_minsh *minsh)
 {
-	char	var_name[256];
 	int		var_idx;
+	char	var_name[256];
 	char	*var_value;
+	char	status_str[12];
 
 	var_idx = 0;
 	(*i)++;
 	if (token[*i] == '?')
 	{
-		printf("%d\n", minsh->status);
+		snprintf(status_str, sizeof(status_str), "%d", minsh->status);
+		copy_var_value(res_ctx->result, res_ctx->result_idx, status_str);
 		(*i)++;
 		return (*i);
 	}
 	while (ft_isalnum(token[*i]) || token[*i] == '_')
+	{
 		var_name[var_idx++] = token[(*i)++];
+	}
 	var_name[var_idx] = '\0';
 	var_value = ft_envlst_get(minsh->elst, var_name);
 	if (var_value)
