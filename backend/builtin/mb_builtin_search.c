@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 22:30:11 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/05/22 19:59:14 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/23 21:25:39 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ static int	_mbbs_selector(char **path, char *file_path)
 	if (_mbbs_selector_path(path, file_path, "export", 6) != 0)
 		return (-1);
 	if (_mbbs_selector_path(path, file_path, "unset", 5) != 0)
+		return (-1);
+	if (_mbbs_selector_path(path, file_path, "echo", 4) != 0)
 		return (-1);
 	return (0);
 }
