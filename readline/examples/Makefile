@@ -32,7 +32,7 @@ datadir = ${datarootdir}
 
 top_srcdir = ..
 #BUILD_DIR = .
-BUILD_DIR = /Users/cpark/git/minishell/readline
+BUILD_DIR = /Users/chang-pa/minishell/readline
 installdir = $(datadir)/readline
 
 INSTALL = /usr/bin/install -c

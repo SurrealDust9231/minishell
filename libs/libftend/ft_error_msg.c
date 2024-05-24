@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 21:29:04 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/05/23 14:28:18 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/24 12:58:09 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,9 @@ void	ft_error_nvi(const char *arg, const char *msg)
 	_ft_error_msg_putstr(msg, STDERR_FILENO);
 	_ft_error_msg_putstr(": not a valid identifier", STDERR_FILENO);
 	_ft_error_msg_putstr("\n", STDERR_FILENO);
+}
+
+void	ft_error_msg(const char *msg)
+{
+	_ft_error_msg_putstr(msg, STDERR_FILENO);
 }

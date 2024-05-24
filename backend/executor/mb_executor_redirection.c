@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 18:55:54 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/05/22 19:34:55 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/24 13:11:45 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,32 +62,5 @@ int	mbe_redirect_in(t_astree *node, t_minsh *minsh)
 	mbe_execute_node(node->l, minsh);
 	dup2(original_stdin, STDIN_FILENO);
 	close(original_stdin);
-	return (0);
-}
-
-int	mbe_redirect_heredoc(t_astree *node, t_minsh *minsh)
-{
-	int		fds[2];
-	char	**args;
-	pid_t	pid;
-
-	args = node->data;
-	if (pipe(fds) == -1)
-		return (ft_error_return("mbe_redirect_heredoc1", -1));
-	pid = fork();
-	if (pid == -1)
-		return (ft_error_return("mbe_redirect_heredoc2", -1));
-	else if (pid == 0)
-	{
-		close(fds[0]);
-		write(fds[1], args[0], strlen(args[0]));
-		close(fds[1]);
-		exit(0);
-	}
-	close(fds[1]);
-	dup2(fds[0], STDIN_FILENO);
-	wait(NULL);
-	close(fds[0]);
-	mbe_execute_node(node->l, minsh);
 	return (0);
 }
