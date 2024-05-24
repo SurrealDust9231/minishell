@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_commands.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 14:56:40 by saguayo-          #+#    #+#             */
-/*   Updated: 2024/05/23 20:22:34 by saguayo-         ###   ########.fr       */
+/*   Updated: 2024/05/23 22:14:04 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ t_astree	*parse_command_args(char **tokens, int *index, t_astree **left)
 	if (ft_ast_create(left) != 0)
 		return (NULL);
 	ft_ast_init(*left, TK_COMMAND, cmd_args);
-	// printf("Creating command node: %s\n", tokens[*index]);
 	*index += arg_count;
 	return (*left);
 }
@@ -52,7 +51,6 @@ t_astree	*handle_pipe(char **tokens, int *index, t_astree *left)
 	ft_ast_init(pipe_node, TK_PIPE, NULL);
 	pipe_node->l = left;
 	pipe_node->r = right;
-	// printf("Creating pipe node\n");
 	return (pipe_node);
 }
 

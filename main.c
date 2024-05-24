@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 14:04:06 by saguayo-          #+#    #+#             */
-/*   Updated: 2024/05/23 21:57:46 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/23 22:13:48 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ int	main(int ac, char **av, char **_envs)
 			break ;
 		if (!msst.state.result && _minishell_cleanup_cache(&msst))
 			continue ;
-		if (_minishell_parsing_ast(&msst) != 0 && _minishell_cleanup_cache(&msst))
+		if (_minishell_parsing_ast(&msst) != 0
+			&& _minishell_cleanup_cache(&msst))
 			break ;
 		_minishell_cleanup_cache(&msst);
 	}
