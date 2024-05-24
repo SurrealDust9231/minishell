@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
+/*   By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 19:01:01 by saguayo-          #+#    #+#             */
-/*   Updated: 2024/05/23 22:14:35 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/24 12:34:38 by saguayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,29 +37,23 @@ t_astree	*handle_redirect_tokens(char **tokens, int *index, t_astree *left)
 	{
 		(*index)++;
 		left = create_red_node(tokens, index, left, TK_REDIRECT_OUT);
-		if (left == NULL)
-			return (NULL);
 	}
 	else if (ft_strcmp(tokens[*index], ">>") == 0)
 	{
 		(*index)++;
 		left = create_red_node(tokens, index, left, TK_REDIRECT_APPEND);
-		if (left == NULL)
-			return (NULL);
 	}
 	else if (ft_strcmp(tokens[*index], "<") == 0)
 	{
 		(*index)++;
 		left = create_red_node(tokens, index, left, TK_REDIRECT_IN);
-		if (left == NULL)
-			return (NULL);
 	}
 	else if (ft_strcmp(tokens[*index], "<<") == 0)
 	{
 		(*index)++;
 		left = create_red_node(tokens, index, left, TK_REDIRECT_HEREDOC);
-		if (left == NULL)
-			return (NULL);
 	}
+	if (left == NULL)
+		return (NULL);
 	return (left);
 }
