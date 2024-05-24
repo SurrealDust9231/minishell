@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 14:04:06 by saguayo-          #+#    #+#             */
-/*   Updated: 2024/05/23 18:31:43 by saguayo-         ###   ########.fr       */
+<<<<<<< Updated upstream
+/*   Updated: 2024/05/23 20:59:58 by chang-pa         ###   ########.fr       */
+=======
+/*   Updated: 2024/05/23 20:46:52 by saguayo-         ###   ########.fr       */
+>>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +71,10 @@ int	main(int ac, char **av, char **_envs)
 			break ;
 		if (!msst.state.result && _minishell_cleanup_cache(&msst))
 			continue ;
-		if (_minishell_parsing_ast(&msst) != 0)
+		if (_minishell_parsing_ast(&msst) != 0 && _minishell_cleanup_cache(&msst))
 			break ;
 		_minishell_cleanup_cache(&msst);
 	}
-	// _minishell_cleanup_cache(&msst);
 	ft_minsh_destroy(msst.minsh);
 	return (0);
 }

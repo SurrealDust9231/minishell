@@ -6,7 +6,7 @@
 #    By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/21 00:28:11 by chang-pa          #+#    #+#              #
-#    Updated: 2024/05/23 18:41:02 by saguayo-         ###   ########.fr        #
+#    Updated: 2024/05/23 20:44:39 by saguayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ BE_DIR=backend
 BE_FLAGS=-lminback -L$(BE_DIR)
 BE_INC=-I$(BE_DIR)/includes
 
+# RL_FLAGS= -lreadline
 RL_FLAGS=-Lreadline readline/libhistory.a \
 readline/libreadline.a
 
