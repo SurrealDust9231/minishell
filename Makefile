@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+         #
+#    By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/21 00:28:11 by chang-pa          #+#    #+#              #
-#    Updated: 2024/05/23 21:33:21 by chang-pa         ###   ########.fr        #
+#    Updated: 2024/05/24 12:36:10 by saguayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,6 @@ fclean: clean
 	@make -C $(FE_DIR) fclean
 	@make -C $(BE_DIR) fclean
 	@make -C $(BTIN_DIR) fclean
-	@make -C unittests fclean
 	@rm -f $(NAME)
 
 clean:
@@ -78,7 +77,6 @@ clean:
 	@make -C $(FE_DIR) clean
 	@make -C $(BE_DIR) clean
 	@make -C $(BTIN_DIR) clean
-	@make -C unittests clean
 	@rm -f $(OBJS)
 
 rootd:
