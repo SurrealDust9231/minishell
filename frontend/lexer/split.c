@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
+/*   By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 18:42:30 by saguayo-          #+#    #+#             */
-/*   Updated: 2024/05/23 00:54:10 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/23 21:04:51 by saguayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,11 @@ static void	handle_character(t_split_state *state, char *str)
 	else if (current == '\"' && !state->in_single_quote)
 	{
 		state->in_double_quote = !state->in_double_quote;
-		state->token[state->token_index++] = current;
 	}
 	else if (!state->in_single_quote && !state->in_double_quote)
+	{
 		special_character(state, current, str);
+	}
 	else
 		state->token[state->token_index++] = current;
 }
@@ -63,6 +64,12 @@ int	custom_split(char *str, t_split_state *state)
 	{
 		handle_character(state, str);
 		state->i++;
+	}
+	if (state->in_double_quote)
+	{
+		printf("Error: doubles quotes are open.\n");
+		cleanup_split_state(state);
+		return (-1);
 	}
 	add_token_if_needed(state);
 	return (0);
