@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 15:28:20 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/05/23 14:57:38 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/23 18:07:37 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void		ft_envlst_push(t_envlst **elst, t_envlst *node);
 void		ft_envlst_showall(t_envlst *elst);
 void		ft_envlst_showall_ascii(t_envlst *elst);
 int			ft_envlst_set(t_envlst **elst, char *key, char *value);
+size_t		ft_envlst_size(t_envlst *elst);
 
 int			ft_minsh_init(t_minsh **minsh, char **envs);
 void		ft_minsh_destroy(t_minsh *minsh);

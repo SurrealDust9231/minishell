@@ -3,17 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   mb_executor_simple_cmd.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
+/*   By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 17:48:20 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/05/22 20:57:34 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/23 20:33:41 by saguayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_backend.h"
 
-static int	_mbes_cmd_return(char **path, int r)
+static int	_mbes_cmd_return(char **path, t_minsh *minsh, int exr, char *av)
 {
+	int	r;
+
+	r = 0;
+	if (exr == 127)
+	{
+		minsh->status = exr;
+		ft_error_cnf(av);
+	}
+	else if (exr == 1)
+	{
+		minsh->status = exr;
+		r = -1;
+	}
 	if (*path)
 	{
 		free(*path);
@@ -36,16 +49,16 @@ int	mbe_simple_cmd(t_astree *node, char **av, t_minsh *minsh)
 	else if (path)
 	{
 		if (mbb_cmd(node->data, path, minsh) != 0)
-			return (_mbes_cmd_return(&path, -1));
+			return (_mbes_cmd_return(&path, minsh, 1, av[0]));
 	}
 	else if (mbn_search(&path, av[0], minsh) != 0)
 		return (ft_error_return("_mbes_cmd2", -1));
 	else if (path)
 	{
 		if (mbn_cmd(node->data, path, minsh) != 0)
-			return (_mbes_cmd_return(&path, -1));
+			return (_mbes_cmd_return(&path, minsh, 1, av[0]));
 	}
 	else
-		ft_error_cnf(av[0]);
-	return (_mbes_cmd_return(&path, 0));
+		return (_mbes_cmd_return(&path, minsh, 127, av[0]));
+	return (_mbes_cmd_return(&path, minsh, 0, av[0]));
 }

@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 22:37:33 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/05/23 14:50:00 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/23 20:24:54 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static int	_mbe_builtin_cmd_execv(char **av, char *path, t_minsh *minsh)
 	else if (child_pid < 0)
 		return (ft_error_return("mbeb_cmd1", -1));
 	waitpid(child_pid, &minsh->status, 0);
+	minsh->status = minsh->status / 256;
 	return (0);
 }
 
