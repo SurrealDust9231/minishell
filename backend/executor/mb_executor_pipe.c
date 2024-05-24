@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mb_executor_pipe.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saguayo- <saguayo-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 18:55:54 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/05/23 20:22:26 by saguayo-         ###   ########.fr       */
+/*   Updated: 2024/05/24 14:30:29 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	_mbe_pipe_left(t_astree *left, \
 		dup2(fds[1], STDOUT_FILENO);
 		close(fds[1]);
 		mbe_execute_node(left, minsh);
-		exit(EXIT_SUCCESS);
+		exit(minsh->status);
 	}
 	else if (pid < 0)
 		return (ft_error_return("_mbe_pipe_left: ", -1));
@@ -37,7 +37,7 @@ static int	_mbe_pipe_right(t_astree *right, \
 		dup2(fds[0], STDIN_FILENO);
 		close(fds[0]);
 		mbe_execute_node(right, minsh);
-		exit(EXIT_SUCCESS);
+		exit(minsh->status);
 	}
 	else if (pid < 0)
 		return (ft_error_return("_mbe_pipe_right: ", -1));
@@ -66,6 +66,7 @@ int	mbe_pipe(t_astree *node, t_minsh *minsh)
 			close(fds[1]);
 			waitpid(pid[0], &status, 0);
 			waitpid(pid[1], &status, 0);
+			minsh->status = status / 256;
 		}
 	}
 	return (0);

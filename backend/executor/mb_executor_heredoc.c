@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:51:00 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/05/24 14:05:35 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/24 14:30:39 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static int	_mberh_left(t_astree *left, \
 		dup2(fds[0], STDIN_FILENO);
 		close(fds[0]);
 		mbe_execute_node(left, minsh);
-		exit(EXIT_SUCCESS);
+		exit(minsh->status);
 	}
 	else if (pid < 0)
 		return (ft_error_return("_mberh_left: ", -1));
@@ -94,6 +94,7 @@ int	mbe_redirect_heredoc(t_astree *node, t_minsh *minsh)
 			close(fds[0]);
 			close(fds[1]);
 			waitpid(pid[1], &status, 0);
+			minsh->status = status / 256;
 		}
 	}
 	return (0);
