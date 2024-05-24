@@ -6,7 +6,7 @@
 /*   By: chang-pa <changgyu@yonsei.ac.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 22:38:08 by chang-pa          #+#    #+#             */
-/*   Updated: 2024/05/22 20:52:20 by chang-pa         ###   ########.fr       */
+/*   Updated: 2024/05/23 20:24:40 by chang-pa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,6 @@ int	mbn_cmd(char **av, char *path, t_minsh *minsh)
 	else if (child_pid < 0)
 		return (ft_error_return("mben_cmd1", -1));
 	waitpid(child_pid, &minsh->status, 0);
+	minsh->status = minsh->status / 256;
 	return (0);
 }
